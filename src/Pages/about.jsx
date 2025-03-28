@@ -9,6 +9,7 @@ import LearningGrid from '../components/core/aboutpage/LearningGrid'
 import Quote from '../components/core/aboutpage/Quote'
 import ContactFormSection from '../components/core/aboutpage/ContactFormSection'
 import Footer from '../components/core/Homepage/common/footer';
+import ReviewSlider from '../components/core/Homepage/common/ReviewSlider'
 
 
  
@@ -132,7 +133,7 @@ const About = () => {
      <section className='mb-10'>
       <div className='text-richblack-5 text-center text-2xl font-semibold'>
         Reviews from other learners
-        {/* <ReviewSlider></ReviewSlider> */}
+         <ReviewSlider></ReviewSlider>
       </div>
      </section>
 

@@ -8,6 +8,7 @@ import { apiconnector } from '../apiconnector';
  
  
 import { endpoints } from "../apis"
+import { useNavigate } from "react-router-dom";
  
  
  
@@ -21,7 +22,8 @@ const {
 } = endpoints
  
 
-export function sendOtp(email, navigate) {
+export function SendOtp(email,navigate) {
+   
   return async (dispatch) => {
    const toastId = toast.loading("Loading...")
   
@@ -51,16 +53,27 @@ export function sendOtp(email, navigate) {
   }
 }
 
-export function signUp(
+export function SignUp(
+ 
+
   accountType,
   firstName,
   lastName,
-  email,
   password,
   confirmPassword,
+  email,
   otp,
-  navigate,
+  navigate
+   
 ) {
+     console.log("value of accountType",accountType);
+    //  console.log("value of firstname",firstName);
+    //  console.log("value of lastname",lastName);
+     console.log("value of email",email);
+    //  console.log("value of password",password);
+     console.log("confirmpassword",confirmPassword);
+    //  console.log("otp",otp);
+    
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
@@ -69,13 +82,13 @@ export function signUp(
         accountType,
         firstName,
         lastName,
-        email,
         password,
         confirmPassword,
+        email,
         otp,
         
       })
-
+ 
       console.log("SIGNUP API RESPONSE............", response)
 
       if (!response.data.success) {
@@ -114,7 +127,7 @@ export function signUp(
         dispatch(setLoading(false));
     }
  }
- export function login(email, password, navigate) {
+ export function login(email, password, navigate,accountType) {
   return async (dispatch) => {
     // const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
@@ -130,6 +143,7 @@ export function signUp(
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
+      if(response?.data?.userexist?.accountType===accountType){
 
       toast.success("Login Successful")
       dispatch(setToken(response.data.token))
@@ -140,6 +154,10 @@ export function signUp(
       localStorage.setItem("token", JSON.stringify(response.data.token))
       localStorage.setItem("user", JSON.stringify(response.data.userexist))
       navigate("/dashboard/my-profile")
+      }else{
+        toast.error("Please Login within your domain");
+        console.log("Select wrong domain");
+      }
     }catch (error) {
        
       console.log("LOGIN API ERROR............", error)

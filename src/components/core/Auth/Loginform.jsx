@@ -4,10 +4,14 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 import { login } from "../../../services/operation/authApi"
+import { ACCOUNT_TYPE } from "../../../utils/constants"
+import Tab from "../Homepage/common/Tab"
+
 
 function Loginform() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [accountType,setAccountType]=useState(ACCOUNT_TYPE.STUDENT);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -27,12 +31,26 @@ function Loginform() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    dispatch(login(email, password, navigate))
-    
+    dispatch(login(email, password, navigate,accountType));
+    setAccountType(ACCOUNT_TYPE.STUDENT);
   }
+   const tabData = [
+      {
+        id: 1,
+        tabName: "Student",
+        type: ACCOUNT_TYPE.STUDENT,
+      },
+      {
+        id: 2,
+        tabName: "Instructor",
+        type: ACCOUNT_TYPE.INSTRUCTOR,
+      },
+    ]
 
   return (
-    <form
+     <div>
+        <Tab tabData={tabData} field={accountType} setField={setAccountType} />
+        <form
       onSubmit={handleOnSubmit}
       className="mt-6 flex w-full flex-col gap-y-4"
     >
@@ -92,6 +110,7 @@ function Loginform() {
         Sign In
       </button>
     </form>
+     </div>
   )
 }
 

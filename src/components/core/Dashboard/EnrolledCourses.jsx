@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getUserEnrolledCourses } from '../../../services/operation/profileapi';
 import ProgressBar from '@ramonak/react-progress-bar';
+import { useNavigate } from 'react-router-dom';
 
 const EnrolledCourses = () => {  // ❌ Remove async here (Not needed)
   const { token } = useSelector((state) => state.auth);
   const [enrolledCourses, setEnrolledCourses] = useState(null);
+  const navigate= useNavigate();
 
   const getEnrolledCourses = async () => {
     try {
@@ -28,7 +30,7 @@ const EnrolledCourses = () => {  // ❌ Remove async here (Not needed)
   useEffect(() => {
     getEnrolledCourses();  // ✅ Call function inside useEffect
   }, [token]); // ✅ Re-fetch if token changes
-//   console.log("check the value of enrolled course",enrolledCourses);
+  console.log("check the value of enrolled course",enrolledCourses);
 
   return (
     <div className='text-white flex flex-col mx-48 mt-10'>
@@ -46,10 +48,14 @@ const EnrolledCourses = () => {  // ❌ Remove async here (Not needed)
               <p>Progress</p>
             </div>
             <div>
-              {enrolledCourses.map((course, index) => (
-                <div key={course._id}> {/* ✅ Add unique key */}
+              {enrolledCourses.map((course, index,arr) => (
+                <div 
+                   className={`flex items-center border border-richblack-700`}
+                   key={index}> {/* ✅ Add unique key */}
                   {/* Left part */}
-                  <div>
+                  <div className='' onClick={() => {
+                    navigate(`/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/sub-section/${course.courseContent?.[0]?.subsection?.[0]?._id}`)
+                  }}>
                     <img src={course.thumbnail} alt="Course Thumbnail" />
                     <div>
                       <p>{course.courseName}</p>

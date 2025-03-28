@@ -8,6 +8,7 @@ const {courseEnrollmentEmail} = require("../mail_templates/CourseEnrollmentEmail
 const mailsender = require("../utils/mailsender");
 const {  mongoose } = require("mongoose");
 const { paymentSuccessEmail } = require("../mail_templates/paymentSuccessEmail");
+const courseProgress = require("../models/courseProgress");
   
   require("dotenv").config();
 
@@ -293,10 +294,18 @@ const enrollStudents = async(Courses,userId,res)=>{
         return res.status(500).json({success:false,message:"Course not Found"});
 
     }
+
+    const CourseProgress = await courseProgress.create({
+      courseID:courseId,
+      userId:userId,
+      completedVideos:[],
+
+    })
     // find the student and add the course to their list of enrolledCourses
     const enrolledStudent = await User.findByIdAndUpdate(userId,{
         $push:{
             courses:courseId,
+            courseProgress:CourseProgress._id,
         }
     },{new:true})
 

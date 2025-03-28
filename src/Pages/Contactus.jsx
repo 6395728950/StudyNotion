@@ -2,6 +2,7 @@ import React from 'react'
 import ContactDetails from '../components/core/contactus/ContactDetails'
 import ContactFormSection from '../components/core/aboutpage/ContactFormSection'
 import Footer from '../components/core/Homepage/common/footer';
+import ReviewSlider from '../components/core/Homepage/common/ReviewSlider';
 const Contactus = () => {
   return (
     <div>
@@ -30,6 +31,7 @@ const Contactus = () => {
 
       <section className='mb-10'>
         <h1 className='text-richblack-5 text-center text-2xl font-semibold'>Reviews from Other learners</h1>
+        <ReviewSlider></ReviewSlider>
       </section>
          <div className='translate-x-8'>
          <Footer></Footer>

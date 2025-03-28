@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import OTPInput from 'react-otp-input';
-import { signUp,sendOtp } from '../services/operation/authApi';
+import {SendOtp, sendOtp, SignUp } from '../services/operation/authApi';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -23,15 +23,18 @@ useEffect(()=>{
 
     const handleonSubmit = (e) =>{
       e.preventDefault();
-        const {acountType,
+        const {accountType,
           firstName, 
           lastName,
-          email,
           password,
-          confirmPassword,                                                                                                                          
+          confirmPassword, 
+          email                                                                                                                         
         } = signupData;
 
-      dispatch(signUp(acountType,firstName,lastName,password,confirmPassword,email,otp,navigate));
+        console.log("email inside the verifyemail",email);
+        console.log("value of confirmPassword",confirmPassword);
+ 
+      dispatch(SignUp(accountType,firstName,lastName,password,confirmPassword,email,otp,navigate));
     }
 
   return (
@@ -56,7 +59,7 @@ useEffect(()=>{
                     <p>Back to Login</p></Link>
                 </div>
 
-                <button onClick ={() =>dispatch(sendOtp(signupData.email,navigate))}>
+                <button onClick ={() =>dispatch(SendOtp(signupData.email,navigate))}>
                   Resend it
                 </button>
             </div>)

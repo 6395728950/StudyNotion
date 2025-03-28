@@ -68,16 +68,24 @@ catch(error){
 exports.signup   = async (req,res) =>{
     try{
     // data fetch from request ki body
-    const{firstName,
+    const{accountType,
+        firstName,
         lastName,
+         password,
+        confirmPassword,
         email,
-        password,
-        confirmpassword,
-        accountType,
-        phonenumber,
-        otp} = req.body;
+       otp} = req.body;
     // validate krlo
-    if(!firstName || !lastName || !email || !password || !confirmpassword || !otp){
+
+    //  console.log("accountType",accountType);
+    //  console.log("firstName",firstName);
+    //  console.log("lastname",lastName);
+    //  console.log("email",email);
+    //  console.log("password",password);
+    //  console.log("confirmpassword",confirmPassword);
+    //   console.log("otp",otp);
+
+ if(!firstName || !lastName || !email || !password || !confirmPassword || !otp ||!accountType){
         return res.status(403).json({
             success:false,
             message:"All fields are required",
@@ -85,7 +93,7 @@ exports.signup   = async (req,res) =>{
     }
     
     // dono password match krlo
-    if(password!== confirmpassword){
+    if(password!== confirmPassword){
         return res.status(400).json({
             success:false,
             message:"password and confirmpassword value does not match",
@@ -102,7 +110,7 @@ exports.signup   = async (req,res) =>{
      }
     // find most recent otp stored for the user
     const recentotp = await OTP.find({email}).sort({createdat:-1}).limit(1);
-    console.log(recentotp);
+    console.log("value of recentOtp",recentotp);
 
     // validate otp
     if(recentotp.length==0){
@@ -138,7 +146,7 @@ exports.signup   = async (req,res) =>{
         email,
         approved:approved,
 
-         phonenumber,
+         
         additionaldetails:profileDetails._id,
         image:`https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
 
@@ -225,13 +233,7 @@ exports.login = async(req,res)=>{
                 message:'password is incorrect',
             });
         }
-
- 
-        
-
-
-       
-    }
+}
     catch(error){
         
        console.log(error);

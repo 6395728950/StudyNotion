@@ -23,13 +23,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Mycourse from "./components/core/Dashboard/Mycourse";
 import AddCourse from "./components/core/Dashboard/AddCourse";
 import CourseUpload from "./components/core/Dashboard/AddCourse/courseUpload";
-import CourseBuilder from "./components/core/Dashboard/AddCourse/courseBuilder/CourseBuilder";
+ 
 import InstructorCourse from "./components/core/Dashboard/InstructorCourse";
 import Editcourse from "./components/core/Dashboard/EditCourse/Editcourse";
 import Catalog from "./Pages/Catalog";
 import CourseDetails from "./Pages/CourseDetails";
 import Instructor from "./components/core/Dashboard/instructorCourse/Instructor";
 import PurchaseHistory from "./components/core/Dashboard/PurchaseHistory";
+import ViewCourse from "./Pages/ViewCourse";
+import VideoDetails from "./components/core/ViewCourse/VideoDetails";
  
 function App() {
   const{user} = useSelector((state)=>state.profile)
@@ -39,7 +41,7 @@ function App() {
         <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
          <Navbar></Navbar>
           <Routes>
-            <Route path="/" element = {       <OpenRoute><Home></Home></OpenRoute>    }> </Route>
+            <Route path="/" element = {       <Home></Home>    }> </Route>
             <Route path="catalog/:catalogName" element={<Catalog></Catalog>}/>
             <Route path="login" element =  {  <OpenRoute><Login></Login>   </OpenRoute> }></Route>
             <Route path="signup" element = {  <OpenRoute><Signup></Signup></OpenRoute>  }></Route>
@@ -48,7 +50,7 @@ function App() {
          <Route path="instructor" element={   <OpenRoute><Instructordetails></Instructordetails></OpenRoute> }></Route>
 <Route path="update-password/:id" element={   <OpenRoute><UpdatePassword></UpdatePassword></OpenRoute>  }></Route>
          <Route path="verify-email" element={ <OpenRoute><VerifyEmail></VerifyEmail></OpenRoute>  }></Route>
-         <Route path="about" element={ <OpenRoute><About></About>  </OpenRoute>  }></Route>
+         <Route path="about" element={ <About></About>    }></Route>
          <Route path="contact" element={ <Contactus></Contactus>  }></Route>
         
          <Route path="mycourses" element={<Mycourse></Mycourse>}></Route>
@@ -94,7 +96,33 @@ function App() {
          </Route> 
         
 
- 
+     {/* here we create nested route for viewcourse */}
+     <Route element={
+      
+        <PrivateRoute>
+            <ViewCourse></ViewCourse>
+        </PrivateRoute>
+     
+     }>
+
+
+     {
+      user?.accountType === ACCOUNT_TYPE.STUDENT && (
+        <>
+        <Route
+        path="view-course/:courseId/section/:sectionId/sub-section/:subsectionId"
+        element={<VideoDetails></VideoDetails>}>
+          
+        </Route>
+        </>
+      )
+     }
+
+     </Route>
+
+     {/* <Route    path="view-course/:courseId/section/:sectionId/sub-section/:subsectionId" element={<ViewCourse></ViewCourse>}>
+
+     </Route> */}
 
         
             <Route path="*" element={<Error></Error>}></Route>

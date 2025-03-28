@@ -4,14 +4,14 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { sendOtp } from "../../../services/operation/authApi"
+import { SendOtp } from "../../../services/operation/authApi"
  import { setSignupData } from "../../../Slices/authSlices"
 import { ACCOUNT_TYPE } from "../../../utils/constants"
 import Tab from "../Homepage/common/Tab"
 
 function Signupform() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // student or instructor
   const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT)
@@ -54,7 +54,7 @@ function Signupform() {
     // To be used after otp verification
     dispatch(setSignupData(signupData))
     // Send OTP to user for verification
-    dispatch(sendOtp(formData.email, navigate("/verify-email")))
+    dispatch(SendOtp(formData.email,navigate))
 
     // Reset
     setFormData({
