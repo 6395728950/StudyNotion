@@ -22,10 +22,10 @@ const viewCourseSlice = createSlice({
             state.totalNoOfLectures = action.payload
         },
         setCompletedLectures:(state,action)=>{
-            state.completedLectures=action.payload
+            state.CompletedLectures=action.payload
         },
         updateCompletedLectures:(state,action)=>{
-            state.CompletedLectures = [...state.completedLectures,action.payload]
+            state.CompletedLectures = [...state.CompletedLectures,action.payload]
         },
     },
 })

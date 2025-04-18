@@ -36,14 +36,16 @@ const CourseTable = ({Courses,setCourses}) => {
    console.log("check value of course inside the courseTable",Courses);
 
   return (
-    <div className='text-white'>
+    <div className='text-white border border-richblack-800 w-3/4'>
       <Table>
         <Thead>
-            <Tr className='flex gap-x-10 border-richblack-800 p-8' >
-                 <Th>Courses</Th>
-                 <Th>Duration</Th>
-                 <Th>Price</Th>
-                 <Th>Actions</Th>
+            <Tr className='flex gap-x-10 border border-richblack-800 p-4 ' >
+                 <Th className='text-left'>Courses</Th>
+                <Th className='flex gap-12 ml-[295px]'>
+                <Th >Duration</Th>
+                <Th >Price</Th>
+                <Th >Actions</Th>
+                </Th>
             </Tr>
         </Thead>
         <Tbody>
@@ -80,7 +82,7 @@ const CourseTable = ({Courses,setCourses}) => {
                                 <Td>
                                     ${course.Price}
                                 </Td>
-                                <Td>
+                                <Td className='flex '>
                                     <MdEdit disabled=
                                     {loading} className='mr-[19px]' onClick={()=>navigate(`/dashboard/edit-course/${course._id}`)}/>
                                     <MdDelete  disabled={loading}

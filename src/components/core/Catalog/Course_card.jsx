@@ -8,7 +8,7 @@ import RatingStars from '../Homepage/common/RatingStars';
 
 
 const Course_card = ({courses,height}) => {
-  // console.log("value of course",courses);
+  console.log("value of course",courses);
     const [avgRating,setavgRating] = useState(0);
 
     useEffect(()=>{
@@ -23,19 +23,23 @@ const Course_card = ({courses,height}) => {
             <img
             src={courses?.thumbnail}
             alt='course ka thumbnail'
-            className={`${height} w-400px rounded-xl object-cover `}>
+            className={`${height} w-400px rounded-md object-cover `}>
             
             </img>
         </div>
-        <div>
-            <p>{courses?.courseName}</p>
-            <p>{courses?.instructor?.firstName}{courses?.instructor.lastName}</p>
-            <div>
-                <span>{avgRating || 0}</span>
+        <div className='ml-2 flex flex-col gap-y-1'>
+             <p className='mt-2 '> {courses?.courseName}</p> 
+             <div className='flex gap-x-1'>
+              <span>By</span>
+             <p className='text-yellow-50'>{courses?.instructor?.firstName}{courses?.instructor.lastName}</p>
+             </div>
+             
+            <div className='flex gap-x-1'>
+                <span className='text-yellow-50'>{avgRating || 0}</span>
                 <RatingStars Review_count={avgRating}></RatingStars>
                 <span>{courses.ratingAndReview?.length} Ratings</span>
             </div>
-            <p>{courses?.Price}</p>
+            <p  className=''> Rs.{courses?.Price}</p>
         </div>
     </div>
     

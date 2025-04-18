@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { createRating } from '../../../services/operation/Courseapi';
 import IconBtn from '../Homepage/common/IconBtn';
 import ReactStars from "react-rating-stars-component"
+import { RxCross2 } from "react-icons/rx";
 
 const CourseReviewModal = ({setReviewModal}) => {
     const {user} = useSelector((state) =>state.profile);
@@ -26,39 +27,40 @@ const CourseReviewModal = ({setReviewModal}) => {
     const onSubmit = async(data) =>{
           await createRating({
             courseId:courseEntireData._id,
-            rating:data.courseRating,
+            Rating:data.courseRating,
     
-            review:data.courseExperience,
+            Review:data.courseExperience,
           },
         token
     );
     setReviewModal(false);
     }
-    const ratingChanged = ()=>{
-
+    const ratingChanged = (newRating)=>{
+      setValue("courseRating",newRating);
     }
   return (
-    <div>
-        <div>
+    <div className='bg-richblack-900 border border-richblack-400 w-1/2 mb-4 rounded-md absolute top-40 left-64 z-1000'>
+        <div className='text-center'>
             {/* modal header */}
-            <div>
-                <p>Add Review</p>  
+            <div className='flex justify-between  bg-richblack-600 pt-4 pb-4 rounded-t-md '>
+                <p className='text-richblack-25 font-semibold text-xl ml-3'>Add Review</p>  
                 <button onClick={()=>setReviewModal(false)}>
-                    close
+                <RxCross2 className='text-xl text-richblack-25 mr-3'/>
+
                 </button>
             </div>
 
             {/* modal body */}
-            <div>
-                   <div>
+            <div className=''>
+                   <div className='flex justify-center mt-5'>
                     <img
                      src={user?.image}
                      alt='user Image'
                      className='aspect-square w-[50px] rounded-full object-cover'
                     />
                     <div>
-                        <p>{user?.firstName} {user?.lastName}</p>
-                        <p>Posting publicly</p>
+                        <p className='text-richblack-25 font-semibold'>{user?.firstName} {user?.lastName}</p>
+                        <p className='text-richblack-25'>Posting publicly</p>
                     </div>
                    </div>
 
@@ -66,31 +68,31 @@ const CourseReviewModal = ({setReviewModal}) => {
                     className='mt-6 flex flex-col items-center'>
                         <ReactStars
                          count={5}
-                         onChage={ratingChanged}
+                         onChange={ratingChanged}
                          size={24}
                          activeColor="#ffd700"/>
-                         <div>
-                            <label htmlFor='courseExperience'>
-                               Add Your Experience *
+                         <div className='flex flex-col w-full  text-start pl-4 pr-4'>
+                            <label htmlFor='courseExperience' className='text-white'>
+                               Add Your Experience <sup className='text-red-700'>*</sup>
                             </label>
                             <textarea 
                             id='courseExperience'
-                            placeholder='Add your Experience here'
+                            placeholder='write your Experience here'
                             {...register("courseExperience",{required:true})}
-                            className='form-style min-h-[130px] w-full'/>
+                            className='form-style min-h-[130px]  bg-richblack-500 border-b border-richblack-400 rounded-md p-2'/>
                             {
                                 errors.courseExperience && (
                                     <span>
-                                        Please add your experience
+                                        Please write your experience
                                     </span>
                                 )
                             }
                          </div>
 
                          {/* create cancel and save button */}
-                         <div>
+                         <div className='flex  gap-3 mt-4'>
                             <button
-                            onClick={()=>setReviewModal(false)}>
+                            onClick={()=>setReviewModal(false)} className='bg-richblack-500 text-center w-20 rounded-md'>
                                 cancel
                             </button>
                             <IconBtn text="save"/>

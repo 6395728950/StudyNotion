@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import IconBtn from '../Homepage/common/IconBtn';
+import { IoChevronBack } from "react-icons/io5";
 
 const VideoDetailsSidebar = ({setReviewModal}) => {
     const[activeStatus,setActiveStatus]= useState("");
@@ -12,7 +13,7 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
     const{
         courseSectionData,
         courseEntireData,
-        completedLectures,
+        CompletedLectures,
         totalNoOfLectures
          
     } = useSelector((state) => state.viewCourse);
@@ -40,14 +41,17 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
     },[courseSectionData,courseEntireData,location.pathname])
   return (
      <>
-     <div>
+     <div className='bg-richblack-700 w-56 h-full'>
         {/* for buttons and heading */}
-        <div>
+        <div className='ml-6 border-b-2 border-richblack-500 mr-2 flex flex-col gap-y-3'>
             {/* for buttons */}
            <div onClick={()=>{
             navigate("/dashboard/enrolled-courses")
-           }}>
+           }} className='underline cursor-pointer flex mt-1'>
+            <IoChevronBack className='mt-1' />
+
             Back
+            </div>
             
 
            <div>
@@ -56,12 +60,12 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
             onClick={()=>setReviewModal(true)}/>
            </div>
 
-           </div>
+            
 
            {/* for heading or title */}
            <div>
-         <p>{courseEntireData?.courseName}</p>
-         <p>{completedLectures?.length} / {totalNoOfLectures}</p>
+         <p className='text-richblack-25 font-semibold'>{courseEntireData?.courseName}</p>
+         <p className='text-richblue-700'>{CompletedLectures?.length} / {totalNoOfLectures}</p>
            </div>
 
 
@@ -79,8 +83,8 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
                     >
                            
                            {/* section */}
-                           <div>
-                            <div>
+                           <div  className='bg-richblack-500 h-10 mt-2'>
+                            <div className=' text-richblack-25 m-4 pt-2  font-semibold '>
                                 {section?.sectionName}
                             </div>
                             {/* add arrow icon  and handle rotate logic */}
@@ -88,12 +92,12 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
                            </div>
 
                            {/* add subsection here */}
-                           <div>
+                           <div   >
                             {
                                 activeStatus===section?._id && (
-                                    <div>
+                                    <div className='bg-richblack-700 h-full ' >
                                         {
-                                               section.subsection.map((topic,index)=>{
+                                               section.subsection.map((topic,index)=>(
                                                 <div
                                                 className={`flex gap-5 p-5 ${videobarActive===topic._id ?"bg-yellow-200 text-richblack-900":"bg-richblack-900 text-white"}`} key={index} onClick={()=>{
                                                     navigate(`/view-course/${courseEntireData?._id}/section/${section?._id}/sub-section/${topic?._id}`)
@@ -101,14 +105,12 @@ const VideoDetailsSidebar = ({setReviewModal}) => {
                                                 }}>
                                                     <input
                                                     type='checkbox'
-                                                    checked={completedLectures.includes(topic?._id)}
-                                                    onChange={()=>{
-
-                                                    }}
+                                                    checked={CompletedLectures.includes(topic?._id)}
+                                                    onChange={()=>{}}
                                                     ></input>
                                                     <span>{topic.title}</span>
                                                 </div>
-                                               })
+                                               ))
                                         }
                                     </div>
                                 )

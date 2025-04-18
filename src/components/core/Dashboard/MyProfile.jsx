@@ -8,6 +8,7 @@ import { formattedDate } from "../../../utils/dateFormatter"
 export default function MyProfile() {
   const { user } = useSelector((state) => state.profile)
   const navigate = useNavigate()
+  console.log("value of user",user);
 
   return (
     <>
@@ -29,41 +30,41 @@ export default function MyProfile() {
             <p className="text-sm text-richblack-300">{user?.email}</p>
           </div>
         </div>
-        <div className="flex gap-2 bg-yellow-100 w-20 rounded-md h-8">
-        <RiEditBoxLine className="ml-2 mt-2 cursor-pointer"/>
+        <div className=" w-20 rounded-md h-8">
+       
         <IconBtn
           text="Edit"
-          onclick={() => {
+          onClick={() => {
             navigate("/dashboard/settings")
           }}
         >
-         
+           <RiEditBoxLine />
         </IconBtn>
         </div>
       </div>
       <div className="my-10 flex flex-col gap-y-10 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
         <div className="flex w-full items-center justify-between">
           <p className="text-lg font-semibold text-richblack-5">About</p>
-          <div className="flex gap-2 bg-yellow-100 w-20 rounded-md h-8">
-        <RiEditBoxLine className="ml-2 mt-2 cursor-pointer"/>
+          <div className="flex gap-2 w-20 rounded-md h-8">
+        
         <IconBtn
           text="Edit"
-          onclick={() => {
+          onClick={() => {
             navigate("/dashboard/settings")
           }}
         >
-         
+          <RiEditBoxLine className="cursor-pointer"/>
         </IconBtn>
         </div>
         </div>
         <p
           className={`${
-            user?.additionalDetails?.about
+            user?.about
               ? "text-richblack-5"
               : "text-richblack-400"
           } text-sm font-medium`}
         >
-          {user?.additionalDetails?.about ?? "Write Something About Yourself"}
+          {user?.additionaldetails?.about ?? "Write Something About Yourself"}
         </p>
       </div>
       <div className="my-10 flex flex-col gap-y-10 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
@@ -71,15 +72,15 @@ export default function MyProfile() {
           <p className="text-lg font-semibold text-richblack-5">
             Personal Details
           </p>
-          <div className="flex gap-2 bg-yellow-100 w-20 rounded-md h-8">
-        <RiEditBoxLine className="ml-2 mt-2 cursor-pointer"/>
+          <div className="flex gap-2 w-20 rounded-md h-8">
+        
         <IconBtn
           text="Edit"
-          onclick={() => {
+          onClick={() => {
             navigate("/dashboard/settings")
           }}
         >
-         
+          <RiEditBoxLine className=" cursor-pointer"/>
         </IconBtn>
         </div>
         </div>
@@ -100,7 +101,7 @@ export default function MyProfile() {
             <div>
               <p className="mb-2 text-sm text-richblack-600">Gender</p>
               <p className="text-sm font-medium text-richblack-5">
-                {user?.additionalDetails?.gender ?? "Add Gender"}
+                {user?.additionaldetails?.gender ?? "Add Gender"}
               </p>
             </div>
           </div>
@@ -114,13 +115,13 @@ export default function MyProfile() {
             <div>
               <p className="mb-2 text-sm text-richblack-600">Phone Number</p>
               <p className="text-sm font-medium text-richblack-5">
-                {user?.additionalDetails?.phonenumber?? "Add Contact Number"}
+                {user?.additionaldetails?.phonenumber?? "Add Contact Number"}
               </p>
             </div>
             <div>
               <p className="mb-2 text-sm text-richblack-600">Date Of Birth</p>
               <p className="text-sm font-medium text-richblack-5">
-                {formattedDate(user?.additionalDetails?.dateofbirth) ??
+                {formattedDate(user?.additionaldetails?.dateofbirth) ??
                   "Add Date Of Birth"}
               </p>
             </div>

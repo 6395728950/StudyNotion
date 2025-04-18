@@ -209,10 +209,12 @@ const Home = () => {
       </div>
     </div>
      </div>
+     <section className='w-full mb-10'>
      <h1 className='text-3xl font-medium text-center mb-10'>Reviews from other learners</h1>
       {/* review slider here */}
 
       <ReviewSlider></ReviewSlider>
+     </section>
      
   </div>
 

@@ -279,9 +279,7 @@ export const deletesubsection =async(formdata,token)=>{
         return [];
     }
 
-    const headers = {
-        Authorization: `Bearer ${token}`,
-    };
+    
 
     let result = [];
     try {
@@ -289,7 +287,10 @@ export const deletesubsection =async(formdata,token)=>{
             "GET",
             GET_ALL_INSTRUCTOR_COURSES_API,
             null,
-             headers
+           {
+              "Authorization": `Bearer ${token}`,
+              "Content-Type": "application/json"
+          },
             
         );
 
@@ -368,22 +369,16 @@ export const markLectureAsComplete = async (data, token) => {
   let result = null
   console.log("mark complete data", data)
   console.log("value of token",token);
-  const toastId = toast.loading("Loading...")
+  // const toastId = toast.loading("Loading...")
   try {
     // const response = await apiconnector("POST", LECTURE_COMPLETION_API, data, {
     //   Authorization: `Bearer ${token}`,
     // });
-
-    const response = await apiconnector(
-      "POST",
-      LECTURE_COMPLETION_API,
-      {
-        data
-      },
-     {
+    
+    const response = await apiconnector("POST", LECTURE_COMPLETION_API, data, {
       Authorization: `Bearer ${token}`,
-     }
-    );
+    })
+    
     console.log(
       "MARK_LECTURE_AS_COMPLETE_API API RESPONSE............",
       response
@@ -392,14 +387,14 @@ export const markLectureAsComplete = async (data, token) => {
     if (!response.data.message) {
       throw new Error(response.data.error)
     }
-    toast.success("Lecture Completed")
+    // toast.success("Lecture Completed")
     result = true
   } catch (error) {
     console.log("MARK_LECTURE_AS_COMPLETE_API API ERROR............", error)
     toast.error(error.message)
     result = false
   }
-  toast.dismiss(toastId)
+  // toast.dismiss(toastId)
   return result
 }
 

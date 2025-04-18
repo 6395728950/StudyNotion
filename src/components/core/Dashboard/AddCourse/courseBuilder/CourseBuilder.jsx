@@ -10,6 +10,8 @@ import NestedView from './NestedView';
 import { createSection } from '../../../../../services/operation/Courseapi';
 import { updateSection } from '../../../../../services/operation/Courseapi';
  import { useEffect } from 'react';
+ import { GrFormNext } from "react-icons/gr";
+ import { IoChevronBack } from "react-icons/io5";
 
 const CourseBuilder = () => {
   const{register,handleSubmit,setValue,formState:{errors}}= useForm();
@@ -103,18 +105,19 @@ console.log("value of course id",course?.course?.updatedCourseDetails?._id? cour
        }
        console.log("course ke data me kya hai after result dispatch",course);
   return (
-    <div className='text-richblack-5'>
-        <p>Course Builder</p>
+    <div className='z-990'>
+       <div className='text-richblack-5 bg-richblack-700 rounded-md pl-4 pr-4'>
+       <p className='text-2xl'>Course Builder</p>
         <form onSubmit={handleSubmit(onSubmit)}>
 
-          <div>
+          <div className='flex flex-col text-left'>
             <label htmlFor='sectionName'>Section name<sup>*</sup></label>
             <input
              id='sectionName'
              placeholder='Add section name'
              {...register("sectionName",{required:true})
              }
-             className='w-full bg-richblack-600'>
+             className='w-full bg-richblack-600 h-9 rounded-md pl-4 border-b border-richblack-200'>
             </input>
             {
               errors.sectionName && (
@@ -157,17 +160,29 @@ console.log("value of course id",course?.course?.updatedCourseDetails?._id? cour
         
         
       }
+       </div>
        
       
      
-     <div className='flex justify-end gap-x-3'>
-      <button onClick={goBack} className=''>
+     <div className='flex justify-end gap-x-3 mt-5'>
+     
+        {/* add icon */}
+        
+       <button className="bg-richblack-600 text-white rounded-md w-24 flex gap-2 p-2 "onClick={goBack}>
+       <IoChevronBack className='mt-1'/>
           Back
+         
       </button>
+         
       {/* <IconBtn text="Next" onClick={goTonext}></IconBtn> */}
 
      
-      <button  className='bg-yellow-100 text-white p-2 rounded-md ' onClick={goTonext}>Next</button>
+      
+     <button  className='bg-yellow-100 text-black p-2 rounded-md w-24 flex gap-2 ' onClick={goTonext}>Next
+     <GrFormNext className='mt-1'/>
+     </button>
+     {/* add icon */}
+
        
      </div>
    

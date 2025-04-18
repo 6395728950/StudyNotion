@@ -53,7 +53,7 @@ const Mycourse = () => {
                        <CiCirclePlus /></span>
                        <IconBtn
                                   text="New"
-                         onclick={() => {
+                         onClick={() => {
                                   navigate("dashboard/course-upload")
                                  }}
                          >
@@ -63,10 +63,10 @@ const Mycourse = () => {
                       </div>
 
 
-                        <div className='mt-14 ml-48 mr-24 border border-richblack-500 h-[634px]'>
+                        <div className='mt-14 ml-48 mr-24 border-2 border-richblack-500 h-[634px]'>
                         <div className='text-richblack-400   flex justify-between  ml-2 mr-2 pt-4 '>
 
-                            <p>COURSES</p>
+                            <p>COURSE</p>
                             <div className='flex gap-6'>
                                 <p>DURATION</p>
                             <p>PRICE</p>

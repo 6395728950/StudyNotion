@@ -17,6 +17,7 @@ export default function UpdatePassword(){
 
     const [showNewPassword,setShowNewPassword] = useState(false);
     const [showoldPassword,setShowoldPassword] = useState(false);
+    const[showconfirmPassword,setShowconfirmPassword] = useState(false);
 
     const {
         register,
@@ -29,7 +30,8 @@ export default function UpdatePassword(){
     const submitPasswordForm=async(data)=>{
 
         try{
-            await changePassword(token,data)
+            const response = await changePassword(token,data);
+         
         }catch(error){
             console.log("ERROR MESSAGE - ", error.message)
         }
@@ -49,15 +51,15 @@ export default function UpdatePassword(){
                               </label>
                             
                             <input
-                            type={showoldPassword ?"text":"password"}
+                            type={showoldPassword ? "text":"password"}
                              name="oldpassword"
                              id="oldpassword"
                              placeholder="Enter  your current password"
-                             className="form-style text-white bg-richblack-700 rounded-md w-full h-14 px-3"
+                             className="form-style text-white bg-richblack-700 rounded-md w-full h-10 border-b border-b-richblack-500 px-3"
                              {...register("oldpassword",{required:true})}
                               />
                                 <span 
-                                className="absolute right-3 top-[38px] z-[10] cursor-pointer mt-3 "
+                                className="absolute right-3 top-[25px] z-[10] cursor-pointer mt-3 "
                                 onClick={()=>setShowoldPassword((prev)=>!prev)}>
                                     {
                                         showoldPassword ?(<AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />):(
@@ -66,7 +68,7 @@ export default function UpdatePassword(){
                                     }
                                 </span>
                                 {
-                                    errors.oldPassword &&(
+                                    errors.oldpassword &&(
                                         <span  className="-mt-1 text-[12px] text-yellow-100" >
                                             Please enter your current password
                                         </span>
@@ -85,15 +87,15 @@ export default function UpdatePassword(){
                               </label>
                             
                             <input
-                            type={showNewPassword ?"text":"password"}
+                            type={showNewPassword ? "text":"password"}
                              name="newpassword"
                              id="newpassword"
                              placeholder="Enter  your New password"
-                             className="form-style  text-white bg-richblack-700 rounded-md w-full h-14 px-3"
+                             className="form-style  text-white bg-richblack-700 rounded-md w-full h-10 border-b border-b-richblack-500 px-3"
                              {...register("newpassword",{required:true})}
                               />
                                 <span 
-                                className="absolute right-3 top-[38px] z-[10] cursor-pointer mt-3"
+                                className="absolute right-3 top-[25px] z-[10] cursor-pointer mt-3"
                                 onClick={()=>setShowNewPassword((prev)=>!prev)}>
                                     {
                                         showNewPassword ?(<AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />):(
@@ -102,7 +104,7 @@ export default function UpdatePassword(){
                                     }
                                 </span>
                                 {
-                                    errors.NewPassword &&(
+                                    errors.newpassword &&(
                                         <span  className="-mt-1 text-[12px] text-yellow-100" >
                                             Please enter your New password
                                         </span>
@@ -115,29 +117,29 @@ export default function UpdatePassword(){
                          {/* confirm new password */}
 
                          <div className="relative flex flex-col gap-2 " >
-                              <label htmlFor="oldpassword" >
+                              <label htmlFor="confirmpassword" >
                                        Confirm New Password
                               </label>
                             
                             <input
-                            type={showoldPassword ?"text":"password"}
-                             name="oldpassword"
-                             id="oldpassword"
+                            type={showconfirmPassword ? "text":"password"}
+                             name="confirmpassword"
+                             id="confirmpassword"
                              placeholder="Enter  your current password"
-                             className="form-style  text-white bg-richblack-700 rounded-md w-full h-14 px-3"
-                             {...register("oldpassword",{required:true})}
+                             className="form-style  text-white bg-richblack-700 rounded-md w-full h-10 border-b border-b-richblack-500 px-3"
+                             {...register("confirmpassword",{required:true})}
                               />
                                 <span 
-                                className="absolute right-3 top-[38px] z-[10] cursor-pointer mt-3"
-                                onClick={()=>setShowoldPassword((prev)=>!prev)}>
+                                className="absolute  right-3 top-[25px] mt-3 z-[10] cursor-pointer "
+                                onClick={()=>setShowconfirmPassword((prev)=>!prev)}>
                                     {
-                                        showoldPassword ?(<AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />):(
+                                        showconfirmPassword ?(<AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />):(
                                             <AiOutlineEye fontSize={24} fill="#AFB2BF" />
                                         )
                                     }
                                 </span>
                                 {
-                                    errors.oldPassword &&(
+                                    errors.confirmpassword &&(
                                         <span  className="-mt-1 text-[12px] text-yellow-100" >
                                             Please enter your confirm new password password
                                         </span>
@@ -158,7 +160,7 @@ export default function UpdatePassword(){
                     >Cancel
 
                     </button>
-                    <div className="bg-yellow-200 w-20 h-10 rounded-md text-center font-semibold pt-2 ">
+                    <div className=" w-20 h-10 rounded-md text-center font-semibold  ">
                     <IconBtn type="submit" text="save">
 
                    </IconBtn>

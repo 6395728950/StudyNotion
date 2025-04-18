@@ -22,14 +22,14 @@ const RenderTotalAmount = ({total,cart}) => {
     }
  
   return (
-    <div> 
-        <div>
+    <div className='flex bg-richblack-700 relative  -top-20 left-3/4 rounded-md flex-col w-56 gap-y-3 pl-3 pb-3'> 
+        <div> 
             <h1>Toatal:</h1>
             <p>Rs.{total}</p>
             </div>
             <div>
                 {/* <Button active={true}  onClick={handleBuycourse}>Buy Now</Button> */}
-                <button onClick={handleBuycourse} className='bg-yellow-25 text-richblack-25 rounded-md w-40 h-10'>Buy Now</button>
+                <button onClick={handleBuycourse} className='bg-yellow-25  rounded-md w-40 h-10 text-black'>Buy Now</button>
             </div>
     </div>
   )

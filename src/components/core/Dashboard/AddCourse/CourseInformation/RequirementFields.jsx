@@ -45,8 +45,8 @@ useEffect(()=>{
         setRequirementList(updateRequirementList);
     }
   return (
-    <div>
-           <label htmlFor={name}>{label}<sup>*</sup></label>
+    <div className='flex flex-col'>
+           <label htmlFor={name} className='text-left opacity-90'>{label}<sup className='text-red-700'>*</sup></label>
            <div>
             <input
              type='text'
@@ -54,7 +54,7 @@ useEffect(()=>{
               value={requirement}
               placeholder={placeholder}
               onChange={(e)=>setrequirement(e.target.value)}
-              className='w-full bg-richblack-700 text-richblack-25'/>
+              className='w-full bg-richblack-600 text-white pl-2 h-9 rounded-md border-b  border-b-richblack-300'/>
               <button type='button'
               onClick={handleAddRequirement}
               className='font-semibold text-yellow-50'>
@@ -85,7 +85,7 @@ useEffect(()=>{
         }
            {
             errors[name] &&(
-                <span>
+                <span className="ml-2 text-xs tracking-wide text-red-700">
                     {label} is required
                 </span>
             )

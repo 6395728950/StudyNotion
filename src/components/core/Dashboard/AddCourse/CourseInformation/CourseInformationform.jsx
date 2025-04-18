@@ -222,47 +222,47 @@ const CourseInformationform = () => {
      onSubmit={handleSubmit(onSubmit)}
      className='rounded-md border-richblack-700 bg-richblack-800 p-6 space-y-8'
  >
-     <div>
-         <label htmlFor='courseTitle'>Course Title<sup>*</sup></label>
+     <div className='flex flex-col' >
+         <label htmlFor='courseTitle' className=' text-left opacity-90' >Course Title<sup className='text-red-700'>*</sup></label>
          <input
              id="courseTitle"
              placeholder='Enter Course Name'
              {...register("courseTitle", { required: true })}
-             className='w-full'
+             className='w-full bg-richblack-600 text-white pl-2 h-9 rounded-md border-b border-b-richblack-300'
          />
-         {errors.courseTitle && <span>Course title is required</span>}
+         {errors.courseTitle && <span className="ml-2 text-xs tracking-wide text-red-700">Course title is required</span>}
      </div>
  
-     <div>
-         <label htmlFor='courseShortDesc'>Course Short Description<sup>*</sup></label>
+     <div className='flex flex-col'>
+         <label htmlFor='courseShortDesc' className=' text-left opacity-90' >Course Short Description<sup className='text-red-700'>*</sup></label>
          <textarea
              id="courseShortDesc"
              placeholder='Enter Description'
              {...register("courseShortDesc", { required: true })}
-             className='min-h-[140px] w-full'
+             className='min-h-[140px] w-full  bg-richblack-600 text-white pl-2 h-9 rounded-md border-b  border-b-richblack-300'
          />
-         {errors.courseShortDesc && <span>Course Description is required</span>}
+         {errors.courseShortDesc && <span className="ml-2 text-xs tracking-wide text-red-700">Course Description is required</span>}
      </div>
  
-     <div className='relative'>
-         <label htmlFor='coursePrice'>Course Price<sup>*</sup></label>
+     <div className='relative flex flex-col'>
+         <label htmlFor='coursePrice' className=' text-left opacity-90' >Course Price<sup className="text-red-700">*</sup></label>
          <input
              id="coursePrice"
              placeholder='Enter Course Price'
              {...register("coursePrice", { required: true })}
-             className='w-full'
+             className='w-full  bg-richblack-600 text-white pl-2 h-9 rounded-md border-b  border-b-richblack-300'
          />
-         <HiOutlineCurrencyRupee className='absolute top-1/2 text-richblack-400' />
-         {errors.coursePrice && <span>Course price is required</span>}
+         <HiOutlineCurrencyRupee className='absolute top-1/2 text-richblack-400 text-2xl' />
+         {errors.coursePrice && <span className="ml-2 text-xs tracking-wide text-red-700">Course price is required</span>}
      </div>
  
-     <div>
-         <label htmlFor="courseCategory">Course Category<sup>*</sup></label>
+     <div className='flex flex-col'>
+         <label htmlFor="courseCategory" className=' text-left opacity-90' >Course Category<sup className='text-red-700'>*</sup></label>
          <select
              id="courseCategory"
              defaultValue=""
              {...register("courseCategory", { required: true })}
-             className="bg-richblack-400 text-richblack-5"
+             className="bg-richblack-600 text-white pl-2 h-9 rounded-md border-b border-b-richblack-300"
          >
              <option value="" disabled>Choose a Category</option>
              {(!Loading || editCourse) && courseCategories?.data?.length > 0 ? (
@@ -275,7 +275,7 @@ const CourseInformationform = () => {
                  <option disabled>No categories available</option>
              )}
          </select>
-         {errors.courseCategory && <span>Course category is required</span>}
+         {errors.courseCategory && <span className="ml-2 text-xs tracking-wide text-red-700">Course category is required</span>}
      </div>
  
      <ChipInput
@@ -298,15 +298,15 @@ const CourseInformationform = () => {
          editData={editCourse ? course?.data?.thumbnail : null}
      />
  
-     <div>
-         <label htmlFor='courseBenefits'>Benefit the course<sup>*</sup></label>
+     <div className='flex flex-col'>
+         <label htmlFor='courseBenefits' className=' text-left opacity-90' >Benefit the course<sup className='text-red-700'>*</sup></label>
          <input
              id="courseBenefits"
              placeholder='Enter course Benefits here'
              {...register("courseBenefits", { required: true })}
-             className='min-h-[140px] w-full'
+             className='min-h-[140px] w-full  bg-richblack-600 text-whiteh-9 rounded-md border-b pl-2 border-b-richblack-300'
          />
-         {errors.courseBenefits && <span>Course Benefit is required</span>}
+         {errors.courseBenefits && <span className="ml-2 text-xs tracking-wide text-red-700">Course Benefit is required</span>}
      </div>
  
      <RequirementFields

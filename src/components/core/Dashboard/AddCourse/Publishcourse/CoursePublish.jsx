@@ -27,8 +27,8 @@ useEffect(()=>{
 
 const goToCourses  = ()=>{
     dispatch(resetCourseState());
-    navigate("/dashboard/instructorcourse");
-    // navigate("/dashboard/my-courses");
+    // navigate("/dashboard/instructorcourse");
+    navigate("/dashboard/my-courses");
 }
  const handleCoursePublish =async()=>{
      if(course?.status===COURSE_STATUS.PUBLISHED && getValues("public")===true||
@@ -65,10 +65,12 @@ const goToCourses  = ()=>{
  }
 
   return (
-    <div className='rounded-md border-[1px] bg-richblack-800 border-richblack-700 p-6 text-white'> 
-        <p>Publish Course</p>
+    <div> 
+         
 
         <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='rounded-md border-[1px] bg-richblack-800 border-richblack-700 p-6 text-white flex flex-col gap-4 text-left mb-6' >
+        <p className='text-2xl'>Publish Course</p>
             <div>
 
                 <label htmlFor='public'>  
@@ -77,11 +79,12 @@ const goToCourses  = ()=>{
                   type="checkbox"
                   {...register("public")}
 
-                   className='rounded h-4 w-4'></input>
-                   <span className='ml-3'>Make this course as public</span>
+                   className='rounded-md h-4 w-4'></input>
+                   <span className='ml-3 text-richblack-400'>Make this course as public</span>
                    </label>
                 
             </div>
+        </div>
 
             <div className='flex justify-end gap-x-3 '>
                 <button 

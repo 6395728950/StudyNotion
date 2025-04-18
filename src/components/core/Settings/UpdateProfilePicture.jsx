@@ -11,7 +11,7 @@ import { useState } from 'react';
 const UpdateProfilePicture = () => {
     const {token} = useSelector((state)=>state.auth);
     const {user} = useSelector((state)=>state.profile);
-    const dispatch = useDispatch;
+    const dispatch = useDispatch();
     const[loading,setLoading] = useState(false);
     const[image,setimage]  = useState(null);
     const[preview,setpreview] = useState(false);
@@ -39,26 +39,29 @@ const UpdateProfilePicture = () => {
     
     }
 
-    const handleFileupload = ()=>{
-        try{
+    const handleFileupload = async() => {
+        try {
             console.log("uploading...")
             setLoading(true);
+            console.log("image ki value", image);
             const formData = new FormData();
-            formData.append("displaypicture",image);
+            formData.append("displaypicture", image);
 
-            dispatch(updateDisplayPicture(token,formData)).then(()=>{
+            
+
+            dispatch(updateDisplayPicture(token, formData)).then(() => {
                 setLoading(false);
-            })
-        }
-        catch(error){
-             console.log("Error Message -",error.message);
+            });
+        } catch (error) {
+            console.log("Error Message -", error.message);
         }
     }
-    useEffect(()=>{
-        if(image){
+
+    useEffect(() => {
+        if (image) {
             previewFile(image);
         }
-    },[image])
+    }, [image]);
   return (
     <>
 
@@ -83,20 +86,20 @@ const UpdateProfilePicture = () => {
                                >
                             Select
                             </button>
-                       <div className='bg-yellow-200 w-32 rounded-md text-black font-semibold px-5  flex gap-2 '>
+                       <div className=' w-32 rounded-md text-black font-semibold px-5  flex gap-2 '>
                        <IconBtn 
                     text={loading ? "Uploading...":"Upload"}
                     
-                    onclick={handleFileupload}   >
+                    onClick={handleFileupload}   >
 
-                       
-                        
-                    </IconBtn>
-                    <p className='mt-2'>  {
+                        <p>  {
                             !loading && (
                                 <FiUpload className="text-lg text-richblack-900 cursor-pointer" />
                             )
                         }</p>
+                        
+                    </IconBtn>
+                    
                        </div>
                     
 

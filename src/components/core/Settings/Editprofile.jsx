@@ -23,6 +23,7 @@ export function Editprofile (){
     const submitProfileForm =async(data)=>{
         try{
               dispatch(updateProfile(token,data))
+             
         }catch(error){
             console.log("ERROR MESSAGE - ", error.message)
         }
@@ -34,7 +35,7 @@ export function Editprofile (){
     <form onSubmit={handleSubmit(submitProfileForm)}>
 
         {/* Profile Information */}
-        <div className="bg-richblack-800 mt-8 px-8 pt-5  flex flex-col gap-2 text-richblack-200 mb-6 pb-6">
+        <div className="bg-richblack-800 mt-8 px-8 pt-5  flex flex-col gap-2 text-richblack-200 mb-6 pb-6 rounded-md">
             <h2 className="text-lg font-semibold text-richblack-5">
                 Profile Information
             </h2>
@@ -51,7 +52,7 @@ export function Editprofile (){
                      name="firstname"
                      id="firstname"
                      placeholder="Enter your First Name"
-                     className="form-style bg-richblack-700 h-10 border-b-2 py-auto px-2 border-b-white rounded-md   text-richblack-5"
+                     className="form-style bg-richblack-700 h-10 border-b py-auto px-2 border-b-richblack-500 rounded-md   text-richblack-5"
                      {...register("firstName",{required:true})}
                      defaultValue={user?.firstName}
 
@@ -73,7 +74,7 @@ export function Editprofile (){
                      name="lastname"
                      id="lastname"
                      placeholder="Enter your Last Name"
-                     className="form-style  bg-richblack-700 h-10 border-b-2 py-auto px-2 border-b-white rounded-md  text-richblack-5"
+                     className="form-style  bg-richblack-700 h-10 border-b py-auto px-2 border-b-richblack-500 rounded-md  text-richblack-5"
                      {...register("lastName",{required:true})}
                      defaultValue={user?.lastName}
 
@@ -98,7 +99,7 @@ export function Editprofile (){
                      name="dob"
                      id="dob"
                      placeholder="dd-mm-yyyy"
-                     className="form-style  bg-richblack-700 h-10 border-b-2 py-auto px-2 border-b-white rounded-md  text-richblack-5"
+                     className="form-style  bg-richblack-700 h-10 border-b py-auto px-2 border-b-richblack-500 rounded-md  text-richblack-5"
                      {...register("dob",{
                         required:{
                             value:true,
@@ -130,7 +131,7 @@ export function Editprofile (){
                      name="gender"
                      id="gender"
                       
-                     className="form-style  bg-richblack-700 h-10 border-b-2 py-auto px-2 border-b-white rounded-md  text-richblack-5"
+                     className="form-style  bg-richblack-700 h-10 border-b py-auto px-2 border-b-richblack-500 rounded-md  text-richblack-5"
                      {...register("gender",{required:true})}
                      defaultValue={user?.additionalDetails?.gender}
 
@@ -168,11 +169,11 @@ export function Editprofile (){
                     </label>
                     <input
                      type="tel"
-                     name="contactnumber"
-                     id="contactnumber"
+                     name="contactNumber"
+                     id="contactNumber"
                      placeholder="Enter Contact Number"
-                     className="form-style  bg-richblack-700 h-10 border-b-2 py-auto px-2 border-b-white rounded-md  text-richblack-5"
-                     {...register("contactnumber",{
+                     className="form-style  bg-richblack-700 h-10 border-b py-auto px-2 border-b-richblack-500 rounded-md  text-richblack-5"
+                     {...register("contactNumber",{
                         required:{value:true,
                             message:"please enter your contact number",
                         },
@@ -205,7 +206,7 @@ export function Editprofile (){
                 name="about"
                 id="about"
                 placeholder="Enter Bio Details"
-                className="form-style  bg-richblack-700 h-10 border-b-2 py-auto px-2   rounded-md border-b-white text-richblack-5"
+                className="form-style  bg-richblack-700 h-10 border-b py-auto px-2   rounded-md border-b-richblack-500 text-richblack-5"
                 {...register("about", { required: true })}
                 defaultValue={user?.additionalDetails?.about}
               />
@@ -229,7 +230,7 @@ export function Editprofile (){
                     >Cancel
 
                     </button>
-                    <div className="bg-yellow-200 w-20 h-10 rounded-md text-center font-semibold pt-2 ">
+                    <div className="w-20 h-10 rounded-md text-center font-semibold  ">
                     <IconBtn type="submit" text="save">
 
                    </IconBtn>

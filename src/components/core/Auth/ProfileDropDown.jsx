@@ -13,6 +13,7 @@ export default function ProfileDropdown() {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
+  console.log("value of user",user);
 
   useOnClickOutside(ref, () => setOpen(false))
 

@@ -13,6 +13,9 @@ import CourseDetailsCard from '../components/core/course/CourseDetailsCard';
 import { setCourse } from '../Slices/courseSlice';
 import { RxDropdownMenu } from 'react-icons/rx';
 import { LiaVideoSolid } from "react-icons/lia";
+import { GiWireframeGlobe } from "react-icons/gi";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import Footer from '../components/core/Homepage/common/footer';
 
  
 const CourseDetails = () => {
@@ -123,26 +126,38 @@ const CourseDetails = () => {
   return (
     <div className='flex flex-col   text-white'>
      
-     <div className='relative flex  flex-col justify-start'>
-
-     <p>{courseName}</p>
-      <p>{coursedesc}</p>
-       <div>
-         <span>{avgReviewCount}</span>
+     <div className='relative flex  justify-between m-8'>
+      <div>
+     <p className='text-2xl font-semibold'>{courseName}</p>
+      <p className='text-richblack-500 py-4'>{coursedesc}</p>
+       <div className='flex gap-x-2'>
+         <span className='text-yellow-50'>{avgReviewCount}</span>
          <RatingStars Review_Count={avgReviewCount} Star_Size={24}/>
-         <span>{`(${ratingAndReview.length} reviews)`}</span>
+         <span className='text-xl font-semibold'>{`(${ratingAndReview.length} reviews)`}</span>
 
          {/* here you need to do something */}
          {/* <span>{`(${studentEnrolled.length || 0} students enrolled)`}</span> */}
        </div>
-        <p>Created By{`${instructor.firstName}`}</p>
+        <p  className='py-6'>Created By {`${instructor.firstName}`}</p>
    
  
-        <div>
-          <p>
+        <div className='flex gap-x-2'>
+          <p className='flex gap-x-4'>
+          <AiOutlineInfoCircle className='text-xl ' />
+
             Created At {formatDate(createdAt)}
           </p>
-          <p> {" "}English</p>
+          <p className='flex gap-x-2'> 
+            <GiWireframeGlobe  className='text-xl'/>
+          English
+          </p>
+        </div>
+        <div className='border border-richblack-400 m-6 p-4   mt-32 h-32 flex flex-col gap-y-3 pl-9 w-full'>
+          <p className='text-xl font-semibold'>What you will learn</p>
+          <div>
+            {whatYouwillLearn}
+          </div>
+        </div>
         </div>
         <div>
           <CourseDetailsCard
@@ -152,18 +167,13 @@ const CourseDetails = () => {
           />
         </div>
      </div>
-        <div>
-          <p>What you will learn</p>
-          <div>
-            {whatYouwillLearn}
-          </div>
-        </div>
+        
 
         {/* here we create course content part */}
 
-        <div>
+        <div className='w-2/3 m-6'>
           <div>
-            <p>
+            <p className='text-xl font-semibold my-6'>
               Course Content:
             </p>
 
@@ -171,13 +181,13 @@ const CourseDetails = () => {
 
            
          <div className='flex gap-x-3 justify-between'>
-         <div>
-            <span>{courseContent.length} section(s)</span>
-            <span>{totalNoofLectures} lecture(s)</span>
+         <div className='mb-4 '>
+            <span className='px-2'>{courseContent.length} section(s)</span>
+            <span className='px-2'>{totalNoofLectures} lecture(s)</span>
             <span>{courseData?.data?.totalDuration} total length</span>
             
           </div>
-            <div>
+            <div className='text-yellow-100'>
             <button onClick={()=>handleActive([courseContent.map((key,index)=>(
                 {index}
             ))])}>
@@ -241,7 +251,9 @@ const CourseDetails = () => {
 
         {
           confirmationModal && <ConfirmationModal modaldata={confirmationModal}/>
+
         }
+         <Footer></Footer>
     </div>
   )
 }

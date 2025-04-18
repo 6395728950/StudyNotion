@@ -248,15 +248,23 @@ exports.login = async(req,res)=>{
 
 // todo: homework
 exports.changepassword =  async(req,res) =>{
+
+    console.log("hello dosto me yaha pr hu inside the auth");
     try{
          // get the data from req body
          // get oldpassword,newPassword ,confirmpassword
          const{
-            password,
+            oldpassword,
             newpassword,
             confirmpassword,
-              email,
+              
                } = req.body;
+               const email = req.User.email;
+            //    console.log("value of oldpassword",oldpassword);
+            //    console.log("value of newpassword",newpassword);
+            //    console.log("value of confirmpassword",confirmpassword);
+            console.log("value of id",email);
+
    const checkuser = await User.findOne({email});
    if(!checkuser){
     return res.status(401).json({
@@ -267,7 +275,7 @@ exports.changepassword =  async(req,res) =>{
 
          
          // validation
-         if(!password || !newpassword || !confirmpassword){
+         if(!oldpassword || !newpassword || !confirmpassword){
             return res.status(400).json({
                 success:false,
                 message:"All field required",
@@ -280,18 +288,23 @@ exports.changepassword =  async(req,res) =>{
                 message:"password does not match",
             });
          }
+          
          // hashpassword
          const hashpassword  = await bcrypt.hash(newpassword,10);
-
+                                       
+         
          // update pwd in db
-         const user  = await User.create({
-            password:hashpassword,
-         })
-
+         checkuser.password = hashpassword;
+         
+         await checkuser.save();
+         
+        //  console.log("value of user",checkuser);
+        console.log("me yaha tk aaya hu");
+   
 
          // send mail- pwd update
-         const mailresponse  = await mailsender(email,"Change Password:",`New password is:${password}`);
-         console.log("email sent successfully:", mailresponse);
+         const mailresponse  = await mailsender(email,"Change Password:",`New password is:${newpassword}`);
+        //  console.log("email sent successfully:", mailresponse);
          
          
     
@@ -301,8 +314,8 @@ exports.changepassword =  async(req,res) =>{
          return res.status(200).json({
             success:true,
             message:"password updated successfully",
-            user,
-            info,
+            checkuser,
+           
          });
 
 

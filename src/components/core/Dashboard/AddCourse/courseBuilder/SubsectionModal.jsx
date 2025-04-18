@@ -369,7 +369,7 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
 
   return (
     <div>
-      <div>
+      <div  className=' z-1000 rounded-md bg-richblack-500 w-full p-20px shadow-lg shadow-richblack-300'>
         <div>
           <p>
             {view && 'Viewing'} {add && 'Adding'} {edit && 'Editing'} Lecture
@@ -394,30 +394,30 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
               
               
     
-              <div>
-                <label htmlFor="lecturetitle">Lecture Title</label>
+              <div className='flex flex-col text-left mt-4'>
+                <label htmlFor="lecturetitle">Lecture Title <sup className='text-red-700'>*</sup></label>
                 <input
                   id="lecturetitle"
                   placeholder="Enter lecture Title"
                   {...register('lectureTitle', { required: true })}
-                  className="w-full"
+                  className="w-full bg-richblack-600 h-8 border-b border-richblack-100 p-2 rounded-md"
                 />
                 {errors.lectureTitle && <span>Lecture Title is required</span>}
               </div>
     
-              <div>
-                <label htmlFor="lecturedesc">Lecture Description</label>
+              <div className='flex flex-col text-left mt-4'>
+                <label htmlFor="lecturedesc">Lecture Description<sup className='text-red-700'>*</sup></label>
                 <textarea
                   id="lecturedesc"
                   placeholder="Enter lecture description"
                   {...register('lectureDesc', { required: true })}
-                  className="w-full min-h-[130px]"
+                 className="w-full bg-richblack-600 min-h-[130px] border-b border-richblack-100 p-2 rounded-md"
                 />
                 {errors.lectureDesc && <span>Lecture Description is required</span>}
               </div>
     
               {!view && (
-                <div>
+                <div className='mt-2'>
                   <IconBtn text={loading ? 'Loading...' : edit ? 'Save Changes' : 'Save'} />
                 </div>
               )}

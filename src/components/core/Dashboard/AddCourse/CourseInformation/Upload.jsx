@@ -85,7 +85,7 @@ export default function Upload({
   console.log("preview source",previewSource);
   return (
     <div className="flex flex-col space-y-2">
-      <label className="text-sm text-richblack-5" htmlFor={name}>
+      <label className="text-sm text-left opacity-90" htmlFor={name}>
         {label} {!viewData && <sup className="text-pink-200">*</sup>}
       </label>
 

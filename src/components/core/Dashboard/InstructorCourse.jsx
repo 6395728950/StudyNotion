@@ -28,7 +28,7 @@ const InstructorCourse = () => {
     <div className='text-white'>
 
         <div className='flex justify-between'>
-            <h1>My Courses</h1>
+            <h1 className='text-2xl'> My Courses</h1>
             <button  className='bg-yellow-100 text-richblack-25 rounded-md flex  p-2'
                onClick={()=>navigate("/dashboard/add-course")} >
               Add course

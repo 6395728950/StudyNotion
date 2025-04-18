@@ -19,9 +19,9 @@ const ReviewSlider = () => {
     useEffect(()=>{
         const fetchAllReviews = async()=>{
             const response = await apiconnector("GET",ratingsEndpoints.REVIEWS_DETAILS_API)
-            console.log("Loging response in rating".response);
-            if(response?.success){
-                setReviews(response?.data);
+            console.log("Loging response in rating",response);
+            if(response?.data?.success){
+                setReviews(response?.data?.data);
             }
         }
         fetchAllReviews();
@@ -50,11 +50,11 @@ const ReviewSlider = () => {
                             className='h-9 w-9 object-cover  rounded-full'/>
                             <p>{review?.user?.firstName} {review?.user?.lastName}</p>
                             <p>{review?.course?.courseName}</p>
-                            <p>{review?.review}</p>
-                            <p>{review?.rating.toFixed(1)}</p>
+                            <p>{review?.Review}</p>
+                            <p>{review?.Rating.toFixed(1)}</p>
                              <ReactStars
                              count={5}
-                             value={review.rating}
+                             value={review.Rating}
                              size={20}
                              edit={false}
                                activeColor="#ffd700"

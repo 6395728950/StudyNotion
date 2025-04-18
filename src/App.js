@@ -28,10 +28,12 @@ import InstructorCourse from "./components/core/Dashboard/InstructorCourse";
 import Editcourse from "./components/core/Dashboard/EditCourse/Editcourse";
 import Catalog from "./Pages/Catalog";
 import CourseDetails from "./Pages/CourseDetails";
-import Instructor from "./components/core/Dashboard/instructorCourse/Instructor";
+ 
 import PurchaseHistory from "./components/core/Dashboard/PurchaseHistory";
 import ViewCourse from "./Pages/ViewCourse";
 import VideoDetails from "./components/core/ViewCourse/VideoDetails";
+import Instructor from "./components/core/Dashboard/InstructorDashboard/Instructor";
+import ResetComplete from "./Pages/ResetComplete";
  
 function App() {
   const{user} = useSelector((state)=>state.profile)
@@ -48,7 +50,17 @@ function App() {
   <Route path="forgot-password" element = {   <OpenRoute><ForgotPassword></ForgotPassword>   </OpenRoute> }></Route>
 
          <Route path="instructor" element={   <OpenRoute><Instructordetails></Instructordetails></OpenRoute> }></Route>
-<Route path="update-password/:id" element={   <OpenRoute><UpdatePassword></UpdatePassword></OpenRoute>  }></Route>
+         <Route
+          path="update-password/:id"
+          element={
+            <OpenRoute>
+              <UpdatePassword />
+            </OpenRoute>
+          }
+        />
+        <Route path="resetComplete" element={<OpenRoute>
+        <ResetComplete></ResetComplete>
+        </OpenRoute>}></Route>
          <Route path="verify-email" element={ <OpenRoute><VerifyEmail></VerifyEmail></OpenRoute>  }></Route>
          <Route path="about" element={ <About></About>    }></Route>
          <Route path="contact" element={ <Contactus></Contactus>  }></Route>
@@ -60,20 +72,23 @@ function App() {
          <Route path="dashboard"
       element={
            
-        <Dashboard></Dashboard> 
+       
+           <Dashboard></Dashboard> 
+         
        
          
       }   >
         
+        <Route path="my-profile" element={<MyProfile />} />
+        <Route path="Settings" element={<Settings />} />
     
-      <Route path="my-profile" element={<MyProfile />} />
-      <Route path="settings" element={<Settings />} />
       {
         user?.accountType===ACCOUNT_TYPE.STUDENT && (
           <>
               <Route path="cart" element={ <Cart></Cart> }></Route>
               <Route path="enrolled-courses" element={ <EnrolledCourses></EnrolledCourses>}></Route>
               <Route path="purchase-history" element={<PurchaseHistory></PurchaseHistory>}></Route>
+             
           </>
         )
        }
@@ -86,22 +101,25 @@ function App() {
               <Route path="mycourse/course-upload" element={<CourseUpload></CourseUpload>} ></Route>
               <Route path="my-courses" element={<InstructorCourse></InstructorCourse>}/>
               <Route path="edit-course/:courseId" element={<Editcourse></Editcourse>}/>
-              <Route path="instructor" element={<Instructor></Instructor>}></Route>
+              <Route path="instructor-dashboard" element={<Instructor></Instructor>}></Route>
+               
            
 
           </>
         )
        }
-         
+          <Route path="settings" element={<Settings />} />
          </Route> 
         
 
      {/* here we create nested route for viewcourse */}
      <Route element={
       
-        <PrivateRoute>
-            <ViewCourse></ViewCourse>
-        </PrivateRoute>
+        
+             <PrivateRoute>
+              <ViewCourse></ViewCourse>
+             </PrivateRoute>
+         
      
      }>
 

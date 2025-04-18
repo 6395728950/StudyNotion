@@ -9,7 +9,9 @@ import 'video-react/dist/video-react.css';
  
 import { markLectureAsComplete } from '../../../services/operation/Courseapi';
 import { updateCompletedLectures } from '../../../Slices/viewCourseSlice';
- 
+import { GiNextButton } from "react-icons/gi";
+import { GiPreviousButton } from "react-icons/gi";
+import { BiRevision } from "react-icons/bi";
 import IconBtn from '../Homepage/common/IconBtn';
 const VideoDetails = () => {
 
@@ -19,7 +21,7 @@ const VideoDetails = () => {
     const{courseId,sectionId,subsectionId} = useParams();
     const{courseSectionData,courseEntireData,CompletedLectures} = useSelector((state)=>state.viewCourse);
     const location = useLocation();
-    const token = useSelector((state)=>state.auth);
+    const {token} = useSelector((state)=>state.auth);
     const[videoData,setVideoData]  = useState("");
     const[videoEnd,setVideoEnd]  = useState("");
     const[loading,setLoading] = useState(false)
@@ -137,7 +139,7 @@ const VideoDetails = () => {
     setLoading(true);
     // PENDING->courseProgress pending in controller
     const res = await markLectureAsComplete({courseId:courseId,subsectionId:subsectionId},token);
-
+     console.log("value of res",res);
     //status update
     if(res){
         dispatch(updateCompletedLectures(subsectionId));
@@ -146,9 +148,9 @@ const VideoDetails = () => {
    }
     
      return (
-    <div>
+    <div  className='ml-60 mr-10 -mt-64 z-900'>
                 {
-                  !videoData ?(<div>
+                  !videoData ?(<div  className='text-red-700 text-xl font-semibold text-center'>
                     No Data Found
                   </div>
                 ):(
@@ -158,6 +160,7 @@ const VideoDetails = () => {
                       playsInline
                       onEnded={()=> setVideoEnd(true)}
                       src={videoData?.videoUrl}
+                      className="border-none relative"
                        
                       >
                         <AiFillPlayCircle/>
@@ -170,11 +173,12 @@ const VideoDetails = () => {
                                       disabled={loading}
                                       onClick={() => handleLectureCompletion()}
                                       text="Mark as completed"
+                                      className="mt-4"
                                     />
                                   )
                                 }
 
-                              <IconBtn
+                              <button
                               disabled={loading}
                               onClick={()=>{
                                 if(playerRef?.current){
@@ -182,16 +186,18 @@ const VideoDetails = () => {
                                   setVideoEnd(false);
                                 }
                               }}
-                              text="Rewatch"
-                              customClasses="text-xl"/>
+                               
+                              className='absolute top-52 left-80'>
+                                  <BiRevision  className='text-richblack-400 text-2xl bg-richblack-25 border border-richblack-5 rounded-full '/>
+                                </button>
                               <div>
                                 {
                                   !isfirstVideo() && (
                                     <button
                                     disabled={loading}
                                     onClick={goToprevVideo}
-                                    className='blackButton'>
-                                         Prev
+                                    className='absolute top-52 left-8'>
+                                        <GiPreviousButton className='text-richblack-400 text-2xl  bg-richblack-25 border border-richblack-5 rounded-full' />
                                     </button>
                                   )
                                 }
@@ -200,8 +206,8 @@ const VideoDetails = () => {
                                     <button 
                                     disabled={loading}
                                     onClick={goToNextVideo}
-                                    className='blackButton'>
-                                       Next
+                                    className='absolute top-52 right-8'>
+                                      <GiNextButton  className='text-richblack-400 text-2xl  bg-richblack-25 border border-richblack-5 rounded-full'/>
                                     </button>
                                   )
                                 }
@@ -213,8 +219,8 @@ const VideoDetails = () => {
                       </Player>
                 )
                 }
-               <h1>{videoData?.title}</h1>
-               <p>{videoData?.desc}</p>
+               <h1 className='text-white text-xl mt-4'>{videoData?.title}</h1>
+               <p className='text-richblack-25'>{videoData?.desc}</p>
 
     </div>
   )
