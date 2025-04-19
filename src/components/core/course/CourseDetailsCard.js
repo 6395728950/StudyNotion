@@ -2,11 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import copy from 'copy-to-clipboard';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toast';
+ 
 import { addToCart } from '../../../Slices/cartSlice';
 import { ACCOUNT_TYPE } from '../../../utils/constants';
 import { FaShareAlt } from "react-icons/fa";
 import { GiCheckMark } from "react-icons/gi";
+import { toast } from 'react-toastify';
  
 
 function CourseDetailsCard ({course,setConfiramtionModal,handleBuyCourse}) {

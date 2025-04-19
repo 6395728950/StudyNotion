@@ -30,7 +30,7 @@ export default function UpdatePassword(){
     const submitPasswordForm=async(data)=>{
 
         try{
-            const response = await changePassword(token,data);
+             await changePassword(token,data);
          
         }catch(error){
             console.log("ERROR MESSAGE - ", error.message)

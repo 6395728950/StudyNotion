@@ -1,5 +1,5 @@
 import React from 'react'
-import IconBtn from './IconBtn'
+// import IconBtn from './IconBtn'
 
 const ConfirmationModal = ({ modaldata = {} }) => {
   // console.log("what is come in modal data",modaldata?.btn1Text);

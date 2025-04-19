@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useRef } from 'react';
-import Button from '../Homepage/Button';
+// import Button from '../Homepage/Button';
 import IconBtn from '../Homepage/common/IconBtn';
 import { FiUpload } from 'react-icons/fi';
 import { updateDisplayPicture } from '../../../services/operation/SettingsApi';

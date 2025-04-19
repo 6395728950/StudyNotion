@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { apiconnector } from '../apiconnector';
 import { catalogData } from '../apis';
 import { toast } from 'react-toastify';

@@ -14,7 +14,7 @@ import ReactStars from 'react-rating-stars-component'
 const ReviewSlider = () => {
 
     const[reviews,setReviews] = useState([]);
-    const truncateWords = 15;
+    // const truncateWords = 15;
 
     useEffect(()=>{
         const fetchAllReviews = async()=>{
