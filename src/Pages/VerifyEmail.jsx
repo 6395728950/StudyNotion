@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import OTPInput from 'react-otp-input';
-import {SendOtp, sendOtp, SignUp } from '../services/operation/authApi';
+import {SendOtp,  SignUp } from '../services/operation/authApi';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';

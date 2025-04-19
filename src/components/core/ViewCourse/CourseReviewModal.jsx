@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { set, useForm } from 'react-hook-form';
-import { PiSubtractSquare } from 'react-icons/pi'
+import { useForm } from 'react-hook-form';
+ 
 import { useSelector } from 'react-redux'
 import { createRating } from '../../../services/operation/Courseapi';
 import IconBtn from '../Homepage/common/IconBtn';

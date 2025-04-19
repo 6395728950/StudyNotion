@@ -2,10 +2,10 @@ import React from 'react'
 import RenderCartCourses from './RenderCartCourses';
 import RenderTotalAmount from './RenderTotalAmount';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+ 
 const Cart = () => {
     const{total ,totalItems,cart} = useSelector((state)=>state.cart);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     console.log("check the  value of total",total);
     console.log("check the value of totalItem",totalItems);
     console.log("check the value of cart",cart);

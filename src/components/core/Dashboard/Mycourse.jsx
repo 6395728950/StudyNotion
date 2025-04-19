@@ -4,7 +4,7 @@ import { getAllCourse } from '../../../services/operation/Courseapi'
 import { CiCirclePlus } from "react-icons/ci";
 import { useState } from 'react';
  import IconBtn from '../Homepage/common/IconBtn';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { HiOutlineCurrencyRupee } from 'react-icons/hi2';
 import { FiEdit2 } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";

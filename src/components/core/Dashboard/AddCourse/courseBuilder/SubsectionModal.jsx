@@ -210,7 +210,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createsubsection, updateSubsection } from '../../../../../services/operation/Courseapi';
-import { setCourse ,setEditCourse} from '../../../../../Slices/courseSlice';
+import { setCourse} from '../../../../../Slices/courseSlice';
 import { RxCross2 } from 'react-icons/rx';
 import IconBtn from '../../../Homepage/common/IconBtn';
 import { useForm } from 'react-hook-form';
@@ -224,7 +224,7 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
   const [loading, setLoading] = useState(false);
     const{course} = useSelector((state)=>state.course);
     const{token}  = useSelector((state)=>state.auth);
-    const[editstate,setEditCourse] = useState(null);
+    // const[editstate,setEditCourse] = useState(null);
   console.log("data of modal",modalData);
 
   
@@ -301,7 +301,7 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
       };
       console.log("updated courses inside the subsectionModal",updatedCourse);
        dispatch(setCourse(updatedCourse));
-       console.log("check data in edit state",editstate);
+      //  console.log("check data in edit state",editstate);
     }
     
     

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch,useSelector } from 'react-redux';
  import { useParams,useNavigate } from 'react-router-dom';
  import { buyCourse } from '../services/operation/studentFeaturesApi';
-  import { fetchCourseDetails, getAllCourse } from '../services/operation/Courseapi';
+  import { fetchCourseDetails } from '../services/operation/Courseapi';
 import GetAvgRating from '../utils/avgRating';
 import Error from "./Error";
 import ConfirmationModal from '../components/core/Homepage/common/ConfirmationModal';
@@ -10,7 +10,7 @@ import ConfirmationModal from '../components/core/Homepage/common/ConfirmationMo
 import RatingStars from '../components/core/Homepage/common/RatingStars';
 import {formatDate} from "../../src/services/FormatDate"
 import CourseDetailsCard from '../components/core/course/CourseDetailsCard';
-import { setCourse } from '../Slices/courseSlice';
+ 
 import { RxDropdownMenu } from 'react-icons/rx';
 import { LiaVideoSolid } from "react-icons/lia";
 import { GiWireframeGlobe } from "react-icons/gi";
@@ -27,7 +27,7 @@ const CourseDetails = () => {
   const {courseId} =useParams();
   const dispatch = useDispatch();
   const {loading}= useSelector((state)=>state.profile);
-  const {paymentLoading} = useSelector((state)=>state.course);
+  // const {paymentLoading} = useSelector((state)=>state.course);
   const[courseData,setCourseData] = useState(null);
  
   
@@ -70,7 +70,7 @@ const CourseDetails = () => {
     setIsActive(
         !isActive.includes(id)
         ?isActive.concat(id)
-        :isActive.filter((e)=>e!=id)
+        :isActive.filter((e)=>e!==id)
     )
 
   }
@@ -111,16 +111,15 @@ const CourseDetails = () => {
       
     }
     const{
-      _id:course_id,
+   
       courseName,
       coursedesc,
-      thumbnail,
-      Price,
+       
       whatYouwillLearn,
       courseContent,
       ratingAndReview,
       instructor,
-      studentEnrolled,
+     
       createdAt,
     } = courseData.data?.courseDetails;
   return (

@@ -8,7 +8,7 @@ import { categories } from '../services/apis'
 import Course_card from '../components/core/Catalog/Course_card'
 import { getCatalogPageData } from '../services/operation/PageandComponentData'
 import Footer from '../components/core/Homepage/common/footer'
-import { useStore } from 'react-redux'
+ 
 
 
 const Catalog = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import  { useNavigate, useParams } from 'react-router-dom';
 import { Player } from 'video-react';
 import {AiFillPlayCircle} from "react-icons/ai"
 
@@ -20,7 +20,7 @@ const VideoDetails = () => {
     const playerRef = useRef();
     const{courseId,sectionId,subsectionId} = useParams();
     const{courseSectionData,courseEntireData,CompletedLectures} = useSelector((state)=>state.viewCourse);
-    const location = useLocation();
+    
     const {token} = useSelector((state)=>state.auth);
     const[videoData,setVideoData]  = useState("");
     const[videoEnd,setVideoEnd]  = useState("");
@@ -111,7 +111,7 @@ const VideoDetails = () => {
    const goToprevVideo = ()=>{
     const CurrentSectionIndex = courseSectionData.findIndex((data)=>data._id===sectionId)
        
-    const noOfSubSection = courseSectionData[CurrentSectionIndex].subsection.length;
+    // const noOfSubSection = courseSectionData[CurrentSectionIndex].subsection.length;
     const currentSubSectionIndex = courseSectionData[CurrentSectionIndex].subsection.findIndex((data)=>data._id===subsectionId)
 
 
@@ -148,7 +148,7 @@ const VideoDetails = () => {
    }
     
      return (
-    <div  className='ml-60 mr-10 -mt-64 z-900'>
+    <div  className='ml-60 mr-10 -mt-64 z-900 '>
                 {
                   !videoData ?(<div  className='text-red-700 text-xl font-semibold text-center'>
                     No Data Found

@@ -1,5 +1,5 @@
 import "./App.css";
-import {Route,Routes, useNavigate} from "react-router-dom";
+import {Route,Routes} from "react-router-dom";
 import Home from "./Pages/Home";
 import Navbar from "./components/core/Homepage/common/navbar";
 import Login from "./Pages/Login"
@@ -19,7 +19,7 @@ import Error from "./Pages/Error";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import Cart from "./components/core/Dashboard/Cart";
 import { ACCOUNT_TYPE } from "./utils/constants";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import Mycourse from "./components/core/Dashboard/Mycourse";
 import AddCourse from "./components/core/Dashboard/AddCourse";
 import CourseUpload from "./components/core/Dashboard/AddCourse/courseUpload";
@@ -37,8 +37,8 @@ import ResetComplete from "./Pages/ResetComplete";
  
 function App() {
   const{user} = useSelector((state)=>state.profile)
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
   return (
         <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
          <Navbar></Navbar>

@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import NestedView from './NestedView';
 import { createSection } from '../../../../../services/operation/Courseapi';
 import { updateSection } from '../../../../../services/operation/Courseapi';
- import { useEffect } from 'react';
+ 
  import { GrFormNext } from "react-icons/gr";
  import { IoChevronBack } from "react-icons/io5";
 
@@ -17,7 +17,7 @@ const CourseBuilder = () => {
   const{register,handleSubmit,setValue,formState:{errors}}= useForm();
   const course = useSelector((state)=>state.course);
   const[editSectionName,setEditSectionName] = useState(null);
-    const {step}  = useSelector((state)=>state.course)
+    // const {step}  = useSelector((state)=>state.course)
     const dispatch = useDispatch();
     const {token} = useSelector((state)=>state.auth)
     const[loading,setLoading] = useState(false);

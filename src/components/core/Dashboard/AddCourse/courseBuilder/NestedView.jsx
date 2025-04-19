@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RxDropdownMenu } from "react-icons/rx";
-import { MdEdit, MdToken } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { AiOutlinePlus } from "react-icons/ai";

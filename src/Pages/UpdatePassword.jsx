@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation,  } from 'react-router-dom';
 import { AiFillEyeInvisible } from "react-icons/ai";
 import { AiFillEye } from "react-icons/ai";
 import { Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ import ResetComplete from './ResetComplete';
 const UpdatePassword = ({email}) => {
   console.log("value of email inside the updatePassword",email);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const location = useLocation();
     const[formdata ,setformdata] = useState({

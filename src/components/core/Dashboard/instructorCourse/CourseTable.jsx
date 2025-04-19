@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {   useSelector } from 'react-redux'
 import { Table, Tbody, Thead ,Th,Td,Tr} from 'react-super-responsive-table';
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
@@ -14,7 +14,7 @@ import { COURSE_STATUS } from '../../../../utils/constants';
 
 // create delete course api
 const CourseTable = ({Courses,setCourses}) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const {course} = useSelector((state)=>state.course);
     const[loading,setLoading] = useState(false);
     const{token} = useSelector((state)=>state.auth);

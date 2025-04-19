@@ -6,7 +6,7 @@ import { setStep } from '../../../../../Slices/courseSlice';
 import { COURSE_STATUS } from '../../../../../utils/constants';
 import { editCourseDetails } from '../../../../../services/operation/Courseapi';
 import { resetCourseState } from '../../../../../Slices/courseSlice';
-import Button from '../../../Homepage/Button';
+ 
 import { useNavigate } from 'react-router-dom';
  
 
