@@ -5,6 +5,7 @@ import { setUser } from "../../Slices/profileSlice";
 import { apiconnector } from "../apiconnector";
 import { profileEndpoints } from "../apis"
 import { logout } from "./authApi";
+import 'react-toastify/dist/ReactToastify.css';
  
  
 
@@ -20,7 +21,7 @@ export function getUserDetails(token,navigate){
                  const response = await apiconnector("GET",GET_USER_DETAILS_API,null,{
                     Authorization:`Bearer ${token}`
                  })
-                 console.log("get user details ",response)
+               //  console.log("get user details ",response)
                  if(!response.data.success){
                     throw new Error(response.data.message)
                  }
@@ -83,7 +84,7 @@ export function getUserDetails(token,navigate){
         Authorization: `Bearer ${token}`
       });
   
-      console.log("GET_USER_ENROLLED_COURSES", response);
+      //console.log("GET_USER_ENROLLED_COURSES", response);
   
       if (!response.data.success) {
         throw new Error(response.data.message);
@@ -104,7 +105,7 @@ export function getUserDetails(token,navigate){
         const response = await apiconnector("GET",GET_INSTRUCTOR_DATA_API,null,{
            Authorization: `Bearer ${token}`
         });
-        console.log("GET_INSTRUCTOR_API_RESPONSE",response);
+       // console.log("GET_INSTRUCTOR_API_RESPONSE",response);
         result = response?.data?.courses
     
     }catch(error){

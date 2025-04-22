@@ -27,10 +27,10 @@ const CourseBuilder = () => {
     //   console.log("UPDATED");
     // }, [course])
    
-console.log("course ke data me kya hai",course);
-console.log("value of course id",course?.course?.updatedCourseDetails?._id? course?.course?.updatedCourseDetails?._id:course?.course?.data?._id);
+//console.log("course ke data me kya hai",course);
+//console.log("value of course id",course?.course?.updatedCourseDetails?._id? course?.course?.updatedCourseDetails?._id:course?.course?.data?._id);
     const onSubmit = async(data)=>{
-      console.log("form of data ",data);
+     // console.log("form of data ",data);
        
       setLoading(true);
       let result;
@@ -60,14 +60,14 @@ console.log("value of course id",course?.course?.updatedCourseDetails?._id? cour
       // update values
       
        
-           console.log("result ki value in course builder ",result);
-           console.log("result ke success ki value",result?.success);
+          // console.log("result ki value in course builder ",result);
+           //console.log("result ke success ki value",result?.success);
         if(result?.success){
           dispatch(setCourse(result));
             setEditSectionName(null);
             setValue("sectionName","");
         }
-        console.log("course ke data me kya hai after result dispatch",course);
+       // console.log("course ke data me kya hai after result dispatch",course);
       
       setLoading(false);
    }
@@ -103,7 +103,7 @@ console.log("value of course id",course?.course?.updatedCourseDetails?._id? cour
               setEditSectionName(sectionId);
               setValue("sectionName",sectionName);
        }
-       console.log("course ke data me kya hai after result dispatch",course);
+       //console.log("course ke data me kya hai after result dispatch",course);
   return (
     <div className='z-990'>
        <div className='text-richblack-5 bg-richblack-700 rounded-md pl-4 pr-4'>

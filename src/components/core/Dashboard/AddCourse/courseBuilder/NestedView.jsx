@@ -23,7 +23,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
      course=editCourse;
   }
   useEffect(() => {
-    console.log("Updated Redux Course:", editCourse);
+    //console.log("Updated Redux Course:", editCourse);
   }, [editCourse]);
 
   const handleDeleteSubSection = async (subsectionId, sectionId) => {
@@ -31,7 +31,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
 
       // TODO: extra kya kr sakte hai yaha pr
       const result = await deletesubsection({ subsectionId, sectionId, token });
-      console.log("What comes in result when we delete subsection:", result);
+     // console.log("What comes in result when we delete subsection:", result);
       
       if (result) {
         const updatedCourseContent = course?.data?.courseContent.map((section) =>
@@ -56,7 +56,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
     
     setconfirmationmodal(null);
   };
-  console.log("value of course",course);
+ // console.log("value of course",course);
   const handleDeleteSection = async (sectionId) => {
     // console.log("what is value of courseID",course?.data?._id)
     const result = await deletesection({
@@ -160,7 +160,7 @@ const NestedView = ({handleChangeEditSectionName}) => {
                 </div>
                  
               ))}
-                {console.log("check section id is come or not for adding new lecture", section._id)}
+                {/* {console.log("check section id is come or not for adding new lecture", section._id)} */}
                 
               <button
                

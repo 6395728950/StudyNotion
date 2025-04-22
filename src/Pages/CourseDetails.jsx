@@ -49,8 +49,9 @@ const CourseDetails = () => {
   },[courseId])
   
   const[avgReviewCount,setAverageReviewCount]  = useState(0);
+  console.log("value of courseData",courseData);
   useEffect(()=>{
-      const count =  GetAvgRating(courseData?.data?.courseDetails.ratingAndReviews);
+      const count =  GetAvgRating(courseData?.data?.courseDetails.ratingAndReview);
       setAverageReviewCount(count);
   },[courseData])
 
@@ -129,8 +130,8 @@ const CourseDetails = () => {
       <div>
      <p className='text-2xl font-semibold'>{courseName}</p>
       <p className='text-richblack-500 py-4'>{coursedesc}</p>
-       <div className='flex gap-x-2'>
-         <span className='text-yellow-50'>{avgReviewCount}</span>
+       <div className='flex gap-x-1'>
+         <span className='text-yellow-50 text-xl'>{avgReviewCount.toFixed(1)}</span>
          <RatingStars Review_Count={avgReviewCount} Star_Size={24}/>
          <span className='text-xl font-semibold'>{`(${ratingAndReview.length} reviews)`}</span>
 

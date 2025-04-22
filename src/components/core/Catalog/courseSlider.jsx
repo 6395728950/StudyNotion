@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 import Course_Card from "./Course_card"
 
 const CourseSlider = ({course}) => {
-    console.log("what is come in course",course);
+    // console.log("what is come in course",course);
   return (
     <>
     {
@@ -32,7 +32,7 @@ const CourseSlider = ({course}) => {
               1024: { slidesPerView: 3 }, // Corrected typo from sliderPreView to slidesPerView
             }}
           >
-            {console.log("I am inside the Swiper")}
+           {/* // {console.log("I am inside the Swiper")} */}
           
             {course?.map((card, index) => (
               <SwiperSlide key={index}>

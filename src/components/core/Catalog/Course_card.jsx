@@ -8,12 +8,18 @@ import RatingStars from '../Homepage/common/RatingStars';
 
 
 const Course_card = ({courses,height}) => {
-  console.log("value of course",courses);
+  // console.log("value of course",courses);
     const [avgRating,setavgRating] = useState(0);
 
     useEffect(()=>{
+      // console.log("value of ratingAndReview in the course",courses.ratingAndReview);
      const count = GetAvgRating(courses.ratingAndReview);
+    // console.log("value of count ",count);
+     if(count!==NaN && count>0){
+     // console.log("me yaha pr aa ya hu");
      setavgRating(count)
+      
+     }
     },[courses])
   return (
     <div>
@@ -35,9 +41,9 @@ const Course_card = ({courses,height}) => {
              </div>
              
             <div className='flex gap-x-1'>
-                <span className='text-yellow-50'>{avgRating || 0}</span>
-                <RatingStars Review_count={avgRating}></RatingStars>
-                <span>{courses.ratingAndReview?.length} Ratings</span>
+                <span className='text-yellow-50'>{avgRating.toFixed(1) || 0}</span>
+                <RatingStars Review_Count={avgRating}></RatingStars>
+                <span>{courses.ratingAndReview?.length} Reviews</span>
             </div>
             <p  className=''> Rs.{courses?.Price}</p>
         </div>

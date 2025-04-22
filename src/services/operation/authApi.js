@@ -1,9 +1,12 @@
  
-import { toast } from "react-hot-toast";
+ 
 import {setLoading,setToken} from "../../Slices/authSlices";
 import { apiconnector } from '../apiconnector';
  import { setUser } from '../../Slices/profileSlice';
   import { resetCart } from "../../Slices/cartSlice";
+  import { toast } from "react-toastify";
+  import 'react-toastify/dist/ReactToastify.css';
+
 
  
  
@@ -131,14 +134,14 @@ export function SignUp(
   return async (dispatch) => {
     // const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
-    console.log("me yaha hu")
+    // console.log("me yaha hu")
     try {
       const response = await apiconnector("POST", LOGIN_API, {
         email,
         password,
       })
 
-      console.log("LOGIN API RESPONSE............", response)
+      // console.log("LOGIN API RESPONSE............", response)
 
       if (!response.data.success) {
         throw new Error(response.data.message)
@@ -156,11 +159,11 @@ export function SignUp(
       navigate("/dashboard/my-profile")
       }else{
         toast.error("Please Login within your domain");
-        console.log("Select wrong domain");
+        // console.log("Select wrong domain");
       }
     }catch (error) {
        
-      console.log("LOGIN API ERROR............", error)
+      // console.log("LOGIN API ERROR............", error)
       toast.error("Login Failed")
     }
     dispatch(setLoading(false))

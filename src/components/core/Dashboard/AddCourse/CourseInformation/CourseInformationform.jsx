@@ -107,7 +107,7 @@ const CourseInformationform = () => {
  
     const onSubmit = async(data)=>{
        
-        console.log("data which  is  come on submit form",data);
+       // console.log("data which  is  come on submit form",data);
          if(editCourse){
             if(isFormUpdated()){
              const currentValue  = getValues();
@@ -156,13 +156,13 @@ const CourseInformationform = () => {
              formData.append("tag",JSON.stringify(data?.courseTags));
          }
        
-         console.log("before checking the formData")
+        // console.log("before checking the formData")
          for (const [key, value] of formData.entries()) {
-          console.log("here we show all formData");
-          console.log(`${key}: ${value}`);
+          // console.log("here we show all formData");
+          // console.log(`${key}: ${value}`);
         }
           // here we call course edit api
-          console.log("before create new course");
+         // console.log("before create new course");
           setLoading(true);
           const result = await editCourseDetails(formData,token);
           setLoading(false);
@@ -203,7 +203,7 @@ const CourseInformationform = () => {
 
     setLoading(true);
     const result = await addCourseDetails(formData,token);
-    console.log("add course ke result ki value",result);
+    // console.log("add course ke result ki value",result);
     setLoading(false);
 
     if(result){
@@ -213,7 +213,7 @@ const CourseInformationform = () => {
       }
      
     }
-     console.log("category ki value kya hai",courseCategories);
+     //console.log("category ki value kya hai",courseCategories);
 
   return (
      

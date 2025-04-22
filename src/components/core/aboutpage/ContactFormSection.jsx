@@ -3,22 +3,26 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 // import Button from '../Homepage/Button';
-// import { apiconnector } from '../../../services/apiconnector';
-// import { contactusEndpoint } from '../../../services/apis';
+import { apiconnector } from '../../../services/apiconnector';
+import { contactusEndpoint } from '../../../services/apis';
 import CountryCode from "../../../data/countrycode.json"
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const ContactFormSection = () => {
     const [loading,setloading] = useState(false);
     const submitContactForm = async(data)=>{
-         console.log("Logging Data",data);
+        // console.log("Logging Data",data);
          try{
               setloading(true);
-            //   const response =  await apiconnector("POST",contactusEndpoint.CONTACT_US_API);
-              const response = {status:"ok"};
-              console.log("Logging response",response);
+              const response =  await apiconnector("POST",contactusEndpoint.CONTACT_US_API,data);
+            //   const response = {status:"ok"};
+            toast.success("message sent successfully");
+             // console.log("Logging response",response);
               setloading(false);
          }catch(error){
+              toast.error("something is wrong");
                   console.log("Error",error.message);
                   setloading(false);
 

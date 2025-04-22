@@ -225,7 +225,7 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
     const{course} = useSelector((state)=>state.course);
     const{token}  = useSelector((state)=>state.auth);
     // const[editstate,setEditCourse] = useState(null);
-  console.log("data of modal",modalData);
+  //console.log("data of modal",modalData);
 
   
 
@@ -274,8 +274,8 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
     setLoading(true);
 
     const result = await updateSubsection(formData, token);
-     console.log("result in subsectionModal line no.-273",result);
-    console.log("course in subsectionModal",course);
+     //console.log("result in subsectionModal line no.-273",result);
+    //console.log("course in subsectionModal",course);
     if (result && result._id) {
       const updatedCourseContent = [...course?.data?.courseContent];  // Create a shallow copy of the course content
 
@@ -291,7 +291,7 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
        
       //   Section?._id === result._id ? { ...Section, subsection: result.subsection }: Section
       // ));
-      console.log("updated courseContent line no.279",updatedCourseContent);
+     // console.log("updated courseContent line no.279",updatedCourseContent);
       const updatedCourse = {
         ...course,
         data: {
@@ -299,7 +299,7 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
           courseContent: updatedCourseContent,  
         },
       };
-      console.log("updated courses inside the subsectionModal",updatedCourse);
+      //console.log("updated courses inside the subsectionModal",updatedCourse);
        dispatch(setCourse(updatedCourse));
       //  console.log("check data in edit state",editstate);
     }
@@ -326,10 +326,10 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
     formData.append('title', data.lectureTitle);
     formData.append('description', data.lectureDesc);
     formData.append('video', data.lectureVideo);
-    console.log("check the video is prsenet or not",data.lectureVideo);
-    console.log("check the title is prsenet or not",data.lectureTitle);
-    console.log("check the description is prsenet or not",data.lectureDesc);
-    console.log("check the type of video",typeof data.lectureVideo);
+    // console.log("check the video is prsenet or not",data.lectureVideo);
+    // console.log("check the title is prsenet or not",data.lectureTitle);
+    // console.log("check the description is prsenet or not",data.lectureDesc);
+    // console.log("check the type of video",typeof data.lectureVideo);
     
     for (let pair of formData.entries()) {
       console.log(pair[0], pair[1]);
@@ -337,10 +337,10 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
     setLoading(true);
 
     const result = await createsubsection(formData, token);
-    console.log("What is value of result in subsectionModal", result);
+   // console.log("What is value of result in subsectionModal", result);
     
     if (result) {
-      console.log("aap yaha pr ho kya");
+     // console.log("aap yaha pr ho kya");
     
       const updatedCourseContent = course?.data?.courseContent.map((section) =>
         section?._id === modalData
@@ -349,7 +349,7 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
   );
     
     
-      console.log("updatedcoursecontent", updatedCourseContent);
+      //console.log("updatedcoursecontent", updatedCourseContent);
     
       const updatedCourse = {
         ...course,
@@ -358,7 +358,7 @@ const SubsectionModal = ({ modalData, setModalData, add = false, view = false, e
           courseContent: updatedCourseContent,  
         },
       };
-      console.log("updated course ki value",updatedCourse);
+      // console.log("updated course ki value",updatedCourse);
       dispatch(setCourse(updatedCourse));
     }
 

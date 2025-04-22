@@ -11,7 +11,7 @@ export const getAvgRating = async(courseId)=>{
         const response = await apiconnector("GET",GET_AVG_RATING_API,{
             courseId
         })
-        console.log("GET_AVG_RATING_API_RESPONSE",response);
+        //console.log("GET_AVG_RATING_API_RESPONSE",response);
         if(!response.data.success){
             throw new Error(response.data.message);
         }

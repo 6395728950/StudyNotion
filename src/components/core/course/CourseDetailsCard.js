@@ -8,6 +8,7 @@ import { ACCOUNT_TYPE } from '../../../utils/constants';
 import { FaShareAlt } from "react-icons/fa";
 import { GiCheckMark } from "react-icons/gi";
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
  
 
 function CourseDetailsCard ({course,setConfiramtionModal,handleBuyCourse}) {

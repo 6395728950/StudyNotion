@@ -71,9 +71,19 @@ function getRandomInt(max){
               // here we change Published to Draft because still our all courses is not Published when it become Published then you need to change this 
             match:{status:"Draft"},
             populate:{
-                path:"ratingAndReview"
-            }
+                path:"ratingAndReview",
+                select: "Rating",
+            },
          }).exec();
+
+        //  selectedCategory.course.forEach(course => {
+        //     console.log("Course:", course.title);
+        //     course.ratingAndReview.forEach(rating => {
+        //       console.log("Rating:", rating.Rating); // ✅ lowercase `rating`
+        //       console.log("Review:", rating.Review);
+        //     });
+        //   });
+          
            
         //    console.log("value of selectedCategory",selectedCategory);
            
@@ -105,9 +115,13 @@ function getRandomInt(max){
            )
            .populate({
             path:"course",
-            // here we change Published to Draft because still our all courses is not Published when it become Published then you need to change this 
+              // here we change Published to Draft because still our all courses is not Published when it become Published then you need to change this 
             match:{status:"Draft"},
-           }).exec()
+            populate:{
+                path:"ratingAndReview",
+                select: "Rating",
+            },
+         }).exec();
 
            // get top 10 selling course
            const allCategories = await Category.find()
@@ -118,9 +132,14 @@ function getRandomInt(max){
              populate: {
                path: "instructor",
            },
+           populate:{
+            path:"ratingAndReview",
+            select:"Rating",
+           },
            })
            .exec()
-       const allCourses = allCategories.flatMap((category)=>category.course)
+       const allCourses = allCategories.flatMap((category)=>category.course);
+        
        const mostSellingCourses = allCourses
        .sort((a,b)=>b.sold-a.sold)
        .slice(0,10)

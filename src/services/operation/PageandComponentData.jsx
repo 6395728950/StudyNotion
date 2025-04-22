@@ -2,6 +2,7 @@
 import { apiconnector } from '../apiconnector';
 import { catalogData } from '../apis';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const getCatalogPageData= async(categoryId) => {

@@ -112,6 +112,9 @@ const Catalog = () => {
                   {
   catalogPageData?.data?.mostSellingCourses?.slice(0, 4).map((course, index) => (
     <div key={index} className='transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg'>
+      {
+        console.log("value of course",course)
+      }
       {course && <Course_card courses={course} height={"h-[400px]"} />}
     </div>
   ))

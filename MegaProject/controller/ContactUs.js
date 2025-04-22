@@ -3,7 +3,11 @@ const mailsender = require("../utils/mailsender")
 
 exports.contactUsController = async (req, res) => {
   const { email, firstname, lastname, message, phoneNo, countrycode } = req.body
-  console.log(req.body)
+  console.log("value of email",email);
+  console.log("value of firstName",firstname);
+  console.log("value of lastName",lastname);
+  console.log("value of message",message);
+  console.log("value of phoneNo",phoneNo);
   try {
     const emailRes = await mailsender(
       email,

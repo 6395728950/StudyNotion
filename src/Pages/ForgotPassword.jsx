@@ -70,7 +70,7 @@ const ForgotPassword = () =>{
 
         
 }
-    {updatedPassword && <UpdatePassword email={email}/>}
+    {/* {updatedPassword && <UpdatePassword email={email}/>} */}
             
             </div>
   )
