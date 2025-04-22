@@ -2,7 +2,7 @@ const Profile = require("../models/Profile");
 const User = require("../models/User");
 const OTP = require("../models/otp")
 const otpgenerator = require("otp-generator");
-const bcrypt = require("bcrypt");
+const bcryptjs = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
  const mailsender = require("../utils/mailsender")
@@ -125,7 +125,7 @@ exports.signup   = async (req,res) =>{
       });
     } 
     //hash password
-    const hashedpassword  =await bcrypt.hash(password,10);
+    const hashedpassword  =await bcryptjs.hash(password,10);
               // create the user
 
               let approved="";
@@ -198,7 +198,7 @@ exports.login = async(req,res)=>{
             });
         }
         // compare password
-        if(await bcrypt.compare(password,userexist.password)){
+        if(await bcryptjs.compare(password,userexist.password)){
             // generate JWT ,after password matching
             const payload  ={
                 email:userexist.email,
@@ -290,7 +290,7 @@ exports.changepassword =  async(req,res) =>{
          }
           
          // hashpassword
-         const hashpassword  = await bcrypt.hash(newpassword,10);
+         const hashpassword  = await bcryptjs.hash(newpassword,10);
                                        
          
          // update pwd in db
