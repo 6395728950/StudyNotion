@@ -1,64 +1,75 @@
-const express  = require("express");
+const express = require("express");
 const app = express();
-app.use(express.json({ limit: '100mb' }));  // Adjust as needed
-app.use(express.urlencoded({ limit: '100mb', extended: true }));
+const dotenv = require("dotenv");
+dotenv.config();
 
+// Middleware dependencies
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
 
-
+// Import Routes
 const userRoute = require("./routes/User");
-const  courseRoute = require("./routes/Course");
+const courseRoute = require("./routes/Course");
 const profileRoute = require("./routes/Profile");
 const paymentRoute = require("./routes/Payment");
 const contactUsRoute = require("./routes/Contact");
+
+// Database connection
 const database = require("./config/database");
-const cookieparser = require("cookie-parser");
-const cors = require("cors");
-const {cloudinaryConnect} = require("./config/cloudinary");
-const fileUpload =  require("express-fileupload");
-const dotenv = require("dotenv");
-dotenv.config();
+
+// Cloudinary setup
+const { cloudinaryConnect } = require("./config/cloudinary");
+
+// Set up port
 const PORT = process.env.PORT || 4000;
 
-// database connect
+// Connect to the database
 database.connect();
 
-// middleware
-app.use(express.json());
+// Middleware setup
+app.use(express.json({ limit: "100mb" })); // Set JSON limit
+app.use(express.urlencoded({ limit: "100mb", extended: true })); // Handle URL-encoded data
+app.use(cookieParser()); // For cookie handling
 
-app.use(cookieparser());
+// CORS setup
 app.use(
-    cors({
-        origin: ["http://localhost:3000",
-                  "https://studynotion-frontend-inky-eight.vercel.app"
-        ],
+  cors({
+    origin: [
+      "http://localhost:3000", // React development server
+      "https://studynotion-frontend-inky-eight.vercel.app", // Production frontend
+    ],
+    credentials: true,
+  })
+);
 
-        credentials:true,
-    })
-)
-
+// File upload setup
 app.use(
-    fileUpload({
-        useTempFiles:true,
-        tempFileDir:"/temp",
-    })
-)
-// cloudinary connection
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./temp", // Make sure temp directory exists
+  })
+);
+
+// Cloudinary connection
 cloudinaryConnect();
-//routes
-app.use("/api/v1/auth",userRoute);
-app.use("/api/v1/profile",profileRoute);
-app.use("/api/v1/course",courseRoute);
-app.use("/api/v1/payment",paymentRoute);
+
+// Routes setup
+app.use("/api/v1/auth", userRoute);
+app.use("/api/v1/profile", profileRoute);
+app.use("/api/v1/course", courseRoute);
+app.use("/api/v1/payment", paymentRoute);
 app.use("/api/v1/reach", contactUsRoute);
 
-// add default route
-app.get("/",(req,res) =>{
-    return res.json({
-        success:true,
-        message:"Your server is up and running..."
-    })
-});  
+// Default route for testing server
+app.get("/", (req, res) => {
+  return res.json({
+    success: true,
+    message: "Your server is up and running...",
+  });
+});
 
-app.listen(PORT,()=>{
-    console.log(`App is running at ${PORT}`)
-})
+// Start server
+app.listen(PORT, () => {
+  console.log(`🚀 App is running at http://localhost:${PORT}`);
+});
