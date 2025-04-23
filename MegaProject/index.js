@@ -37,7 +37,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000", // React development server
-      "https://studynotion-frontend-inky-eight.vercel.app", // Production frontend
+      "https://studynotion-frontend-inky-eight.vercel.app/"
     ],
     credentials: true,
   })
