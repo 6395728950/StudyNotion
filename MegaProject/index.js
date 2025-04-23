@@ -1,75 +1,78 @@
 const express = require("express");
-const app = express();
+const http = require("http");
 const dotenv = require("dotenv");
-dotenv.config();
-
-// Middleware dependencies
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 
-// Import Routes
+// Load environment variables
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+// Routes
 const userRoute = require("./routes/User");
 const courseRoute = require("./routes/Course");
 const profileRoute = require("./routes/Profile");
 const paymentRoute = require("./routes/Payment");
 const contactUsRoute = require("./routes/Contact");
 
-// Database connection
+// Database and cloudinary setup
 const database = require("./config/database");
-
-// Cloudinary setup
 const { cloudinaryConnect } = require("./config/cloudinary");
 
-// Set up port
-const PORT = process.env.PORT || 4000;
-
-// Connect to the database
+// Connect to DB
 database.connect();
 
-// Middleware setup
-app.use(express.json({ limit: "100mb" })); // Set JSON limit
-app.use(express.urlencoded({ limit: "100mb", extended: true })); // Handle URL-encoded data
-app.use(cookieParser()); // For cookie handling
+// Middleware
+app.use(express.json({ limit: "100mb" }));
+app.use(express.urlencoded({ limit: "100mb", extended: true }));
+app.use(cookieParser());
 
-// CORS setup
 app.use(
   cors({
     origin: [
-      "http://localhost:3000", // React development server
-      "https://studynotion-frontend-inky-eight.vercel.app/"
+      "http://localhost:3000",
+      "https://studynotion-frontend-inky-eight.vercel.app"
     ],
     credentials: true,
   })
 );
 
-// File upload setup
 app.use(
   fileUpload({
     useTempFiles: true,
-    tempFileDir: "./temp", // Make sure temp directory exists
+    tempFileDir: "./temp",
   })
 );
 
-// Cloudinary connection
+// Cloudinary
 cloudinaryConnect();
 
-// Routes setup
+// Routes
 app.use("/api/v1/auth", userRoute);
 app.use("/api/v1/profile", profileRoute);
 app.use("/api/v1/course", courseRoute);
 app.use("/api/v1/payment", paymentRoute);
 app.use("/api/v1/reach", contactUsRoute);
 
-// Default route for testing server
+// Default test route
 app.get("/", (req, res) => {
-  return res.json({
+  res.json({
     success: true,
     message: "Your server is up and running...",
   });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 App is running at http://localhost:${PORT}`);
+// Create HTTP server and configure timeouts
+const server = http.createServer(app);
+
+server.keepAliveTimeout = 120 * 1000; // 120 seconds
+server.headersTimeout = 130 * 1000;   // 130 seconds
+
+// Listen on 0.0.0.0 for Render compatibility
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server is running at http://0.0.0.0:${PORT}`);
 });
+
