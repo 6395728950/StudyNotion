@@ -36,7 +36,7 @@ app.use(
     methods:["GET","PUT","POST","DELETE"],
     allowedHeaders:["Content-Type","Authorization"],
       credentials: true,
-
+      
   })
 );
 

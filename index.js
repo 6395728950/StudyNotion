@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true, limit: "100mb" }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:3000"], // Frontend origin
+    origin:"https://studynotion-frontend-inky-eight.vercel.app",  
     credentials: true,
   })
 );
