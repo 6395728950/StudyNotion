@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
+const database = require("./config/database");
 
 // Load environment variables
 dotenv.config();
@@ -21,7 +22,7 @@ const paymentRoute = require("./routes/Payment");
 const contactUsRoute = require("./routes/Contact");
 
 // Connect to MongoDB
- 
+ database.connect();
 
 exports.connect = async () => {
     try {
