@@ -4,10 +4,12 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
+const mongoose = require("mongoose");
 
 // Load environment variables
 dotenv.config();
 
+// Initialize express app
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -17,76 +19,79 @@ const courseRoute = require("./routes/Course");
 const profileRoute = require("./routes/Profile");
 const paymentRoute = require("./routes/Payment");
 const contactUsRoute = require("./routes/Contact");
-const mongoose = require('mongoose');
 
-// Database and cloudinary setup
-const database = require("./config/database");
+// Connect to MongoDB
+ 
+
+exports.connect = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 20000,
+            socketTimeoutMS: 45000,
+        });
+        console.log("✅ MongoDB connected");
+    } catch (err) {
+        console.error("❌ MongoDB connection error:", err);
+        process.exit(1);
+    }
+};
+
+
+// Connect to Cloudinary
 const { cloudinaryConnect } = require("./config/cloudinary");
-
-// Connect to DB
-database.connect();
-
-mongoose.connect(process.env.MONGODB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 20000, // 20 seconds
-})
-.then(() => console.log("Connected to MongoDB"))
-.catch((err) => {
-  console.error("MongoDB connection error:", err);
-  process.exit(1);
-});
+cloudinaryConnect();
 
 // Middleware
 app.use(express.json({ limit: "100mb" }));
-app.use(express.urlencoded({ limit: "100mb", extended: true }));
+app.use(express.urlencoded({ extended: true, limit: "100mb" }));
 app.use(cookieParser());
 
-app.use(
-  cors({
-    origin:  ["https://studynotion-frontend-inky-eight.vercel.app",
-                "http://localhost:3000"
-    ], 
-    methods:["GET","PUT","POST","DELETE"],
-    allowedHeaders:["Content-Type","Authorization"],
-      credentials: true,
-      
-  })
-);
+// Enable CORS
+app.use(cors({
+  origin: [
+    "https://studynotion-frontend-inky-eight.vercel.app",
+    "http://localhost:3000"
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}));
 
-app.use(
-  fileUpload({
-    useTempFiles: true,
-    tempFileDir: "./temp",
-  })
-);
+// File upload middleware
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: "./temp",
+}));
 
-// Cloudinary
-cloudinaryConnect();
-
-// Routes
+// Mount routes
 app.use("/api/v1/auth", userRoute);
 app.use("/api/v1/profile", profileRoute);
 app.use("/api/v1/course", courseRoute);
 app.use("/api/v1/payment", paymentRoute);
 app.use("/api/v1/reach", contactUsRoute);
 
-// Default test route
-app.get("/", (req, res) => {
+// Health Check route
+app.get("/ping", (_, res) => {
+  res.send("pong");
+});
+
+// Default route
+app.get("/", (_, res) => {
   res.json({
     success: true,
-    message: "Your server is up and running...",
+    message: "✅ Your server is up and running...",
   });
 });
 
-// Create HTTP server and configure timeouts
+// Create HTTP server with extended timeout (Render sometimes causes delays)
 const server = http.createServer(app);
 
-server.keepAliveTimeout = 120 * 1000; // 120 seconds
-server.headersTimeout = 130 * 1000;   // 130 seconds
+server.keepAliveTimeout = 120 * 1000; // 2 minutes
+server.headersTimeout = 130 * 1000;   // Slightly more than keepAlive
 
-// Listen on 0.0.0.0 for Render compatibility
+// Listen for all interfaces (important for Render)
 server.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server is running at http://0.0.0.0:${PORT}`);
+  console.log(`🚀 Server running at http://0.0.0.0:${PORT}`);
 });
 
