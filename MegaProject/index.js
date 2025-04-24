@@ -32,7 +32,9 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin:  "https://studynotion-frontend-inky-eight.vercel.app", 
+    origin:  ["https://studynotion-frontend-inky-eight.vercel.app",
+                "http://localhost:3000"
+    ], 
     methods:["GET","PUT","POST","DELETE"],
     allowedHeaders:["Content-Type","Authorization"],
       credentials: true,
