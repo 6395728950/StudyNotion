@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
-const mongoose = require('mongoose');
 
 // Load environment variables
 dotenv.config();
@@ -18,12 +17,15 @@ const courseRoute = require("./routes/Course");
 const profileRoute = require("./routes/Profile");
 const paymentRoute = require("./routes/Payment");
 const contactUsRoute = require("./routes/Contact");
+const mongoose = require('mongoose');
 
 // Database and cloudinary setup
 const database = require("./config/database");
 const { cloudinaryConnect } = require("./config/cloudinary");
 
 // Connect to DB
+database.connect();
+
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
