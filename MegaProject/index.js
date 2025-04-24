@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
+const mongoose = require('mongoose');
 
 // Load environment variables
 dotenv.config();
@@ -23,7 +24,16 @@ const database = require("./config/database");
 const { cloudinaryConnect } = require("./config/cloudinary");
 
 // Connect to DB
-database.connect();
+mongoose.connect(process.env.MONGODB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 20000, // 20 seconds
+})
+.then(() => console.log("Connected to MongoDB"))
+.catch((err) => {
+  console.error("MongoDB connection error:", err);
+  process.exit(1);
+});
 
 // Middleware
 app.use(express.json({ limit: "100mb" }));
