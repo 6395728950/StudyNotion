@@ -1,13 +1,29 @@
 const mongoose = require("mongoose");
-require("dotenv").config();
+const dotenv = require("dotenv");
 
-exports.connect = ()=>{
-    mongoose.connect(process.env.MONGODB_URL)
-    .then(console.log("DB connected successfully"))
-    .catch((error) =>{
-        console.log("DB connection falied");
-        console.error(error);
-        process.exit(1);
-    })
 
+dotenv.config();
+exports.connect = async () => {
+    
+  try {
+    const db = await mongoose.connect(process.env.MONGODB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 30000,  // 20 sec for server selection
+      socketTimeoutMS: 45000,           // 45 sec for inactivity
+    });
+    console.log("✅ MongoDB connection established");
+
+    mongoose.connection.on("error", (err) => {
+      console.error("❌ Mongoose connection error:", err);
+    });
+
+    mongoose.connection.on("disconnected", () => {
+      console.warn("⚠️ Mongoose disconnected");
+    });
+
+  } catch (error) {
+    console.error("❌ Initial MongoDB connection failed:", error.message);
+    process.exit(1);
+  }
 };

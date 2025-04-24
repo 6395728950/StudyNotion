@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
-const mongoose = require("mongoose");
+ 
 const database = require("./config/database");
 
 // Load environment variables
@@ -24,21 +24,7 @@ const contactUsRoute = require("./routes/Contact");
 // Connect to MongoDB
  database.connect();
 
-exports.connect = async () => {
-    try {
-        await mongoose.connect(process.env.MONGODB_URL, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 20000,
-            socketTimeoutMS: 45000,
-        });
-        console.log("✅ MongoDB connected");
-    } catch (err) {
-        console.error("❌ MongoDB connection error:", err);
-        process.exit(1);
-    }
-};
-
+ 
 
 // Connect to Cloudinary
 const { cloudinaryConnect } = require("./config/cloudinary");
