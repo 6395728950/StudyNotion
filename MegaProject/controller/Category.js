@@ -42,6 +42,7 @@ function getRandomInt(max){
         
        const allCategory = await Category.find({});
     //    console.log("value of all category",allCategory);
+     console.log("find all category successfully");
        res.status(200).json({
         success:true,
         message:"All tags returned successfully",

@@ -21,15 +21,16 @@ const { cloudinaryConnect } = require("./config/cloudinary");
 cloudinaryConnect();
 
 // ✅ CORS configuration (moved to top for best practice)
-app.use(cors({
+const corsOptions = {
   origin: [
-    "https://studynotion-frontend-inky-eight.vercel.app",
-    "http://localhost:3000"
+    'https://studynotion-frontend-inky-eight.vercel.app',
+    'https://studynotion-frontend.vercel.app'
   ],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  optionsSuccessStatus: 200,
-}));
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+app.use(cors(corsOptions));
 
 // ✅ Enable preflight response for all routes
 app.options("*", cors());
@@ -60,6 +61,7 @@ app.use("/api/v1/reach", contactUsRoute);
 
 // Health Check
 app.get("/ping", (_, res) => {
+  conosle.log("it's feel unhealthy");
   res.send("pong");
 });
 

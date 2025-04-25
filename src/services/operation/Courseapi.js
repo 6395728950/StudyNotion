@@ -80,9 +80,7 @@ export const getAllCourse = async(token)=>{
     }
 
 
-    import { toast } from "react-hot-toast";
-    import { apiconnector } from "../apiconnector"; // adjust the path if needed
-    import { COURSE_CATEGORIES_API } from "../apis"; // assuming you have this constant defined
+   
     
     export const fetchCourseCategories = async () => {
       let result = [];
