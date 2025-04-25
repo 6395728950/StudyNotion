@@ -4,8 +4,6 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
- 
-const database = require("./config/database");
 
 // Load environment variables
 dotenv.config();
@@ -14,28 +12,15 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// Routes
-const userRoute = require("./routes/User");
-const courseRoute = require("./routes/Course");
-const profileRoute = require("./routes/Profile");
-const paymentRoute = require("./routes/Payment");
-const contactUsRoute = require("./routes/Contact");
-
-// Connect to MongoDB
- database.connect();
-
- 
+// Connect to DB
+const database = require("./config/database");
+database.connect();
 
 // Connect to Cloudinary
 const { cloudinaryConnect } = require("./config/cloudinary");
 cloudinaryConnect();
 
-// Middleware
-app.use(express.json({ limit: "100mb" }));
-app.use(express.urlencoded({ extended: true, limit: "100mb" }));
-app.use(cookieParser());
-
-// Enable CORS
+// ✅ CORS configuration (moved to top for best practice)
 app.use(cors({
   origin: [
     "https://studynotion-frontend-inky-eight.vercel.app",
@@ -43,7 +28,16 @@ app.use(cors({
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
+  optionsSuccessStatus: 200,
 }));
+
+// ✅ Enable preflight response for all routes
+app.options("*", cors());
+
+// Middleware
+app.use(express.json({ limit: "100mb" }));
+app.use(express.urlencoded({ extended: true, limit: "100mb" }));
+app.use(cookieParser());
 
 // File upload middleware
 app.use(fileUpload({
@@ -51,19 +45,25 @@ app.use(fileUpload({
   tempFileDir: "./temp",
 }));
 
-// Mount routes
+// Routes
+const userRoute = require("./routes/User");
+const courseRoute = require("./routes/Course");
+const profileRoute = require("./routes/Profile");
+const paymentRoute = require("./routes/Payment");
+const contactUsRoute = require("./routes/Contact");
+
 app.use("/api/v1/auth", userRoute);
 app.use("/api/v1/profile", profileRoute);
 app.use("/api/v1/course", courseRoute);
 app.use("/api/v1/payment", paymentRoute);
 app.use("/api/v1/reach", contactUsRoute);
 
-// Health Check route
+// Health Check
 app.get("/ping", (_, res) => {
   res.send("pong");
 });
 
-// Default route
+// Root route
 app.get("/", (_, res) => {
   res.json({
     success: true,
@@ -71,14 +71,15 @@ app.get("/", (_, res) => {
   });
 });
 
-// Create HTTP server with extended timeout (Render sometimes causes delays)
+// HTTP Server with extended timeout for Render
 const server = http.createServer(app);
 
 server.keepAliveTimeout = 120 * 1000; // 2 minutes
 server.headersTimeout = 130 * 1000;   // Slightly more than keepAlive
 
-// Listen for all interfaces (important for Render)
+// Start server
 server.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Server running at http://0.0.0.0:${PORT}`);
 });
+
 

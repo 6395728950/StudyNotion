@@ -80,25 +80,31 @@ export const getAllCourse = async(token)=>{
     }
 
 
-export const fetchCourseCategories= async()=>{
-  let result =[];
-  try{
-       const response = await apiconnector("GET",COURSE_CATEGORIES_API)
-      //  console.log("COURSE_CATEGORIES_API RESPONSE",response)
-       if(!response?.data?.success){
-        throw new Error("Could Not fetch Course Categories")
-       }
-       result = response?.data
-  }catch(error){
-      // console.log("COURSE_CATEGORY_API_ERROR",error)
-      toast.error(error.message)
-  }
-  // console.log("result ki vallue",result)
-
+    import { toast } from "react-hot-toast";
+    import { apiconnector } from "../apiconnector"; // adjust the path if needed
+    import { COURSE_CATEGORIES_API } from "../apis"; // assuming you have this constant defined
+    
+    export const fetchCourseCategories = async () => {
+      let result = [];
+    
+      try {
+        const response = await apiconnector("GET", COURSE_CATEGORIES_API);
+    
+        if (!response?.data?.success) {
+          throw new Error(response?.data?.message || "Could not fetch course categories");
+        }
+    
+        result = response.data;
+    
+      } catch (error) {
+        const errorMsg = error?.response?.data?.message || error.message || "Something went wrong";
+        toast.error(errorMsg);
+        console.error("COURSE_CATEGORY_API_ERROR:", errorMsg);
+      }
     
       return result;
-
-}
+    };
+    
 export const editCourseDetails=async(formData,token)=>{
   let result = null;
      console.log("here we check the formData")

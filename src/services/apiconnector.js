@@ -1,16 +1,18 @@
- import axios from "axios"
+import axios from "axios";
+
+// ✅ Render backend base URL
 export const axiosInstance = axios.create({
-    baseURL: "https://studynotion-1rps.onrender.com/api/v1",
-    withCredentials: true,
+  baseURL: "https://studynotion-1rps.onrender.com/api/v1",
+  withCredentials: true,
 });
 
-export const apiconnector = (method,url,bodyData,headers,params) =>{
-    return axiosInstance({
-        method:`${method}`,
-        url:`${url}`,
-        data:bodyData ? bodyData:null,
-        headers:headers ? headers:null,
-        params:params ? params:null,
-
-    })
-}
+// ✅ Improved apiconnector function
+export const apiconnector = (method, url, bodyData = {}, headers = {}, params = {}) => {
+  return axiosInstance({
+    method: method,
+    url: url,
+    data: bodyData,
+    headers: headers,
+    params: params,
+  });
+};
