@@ -42,7 +42,7 @@ function getRandomInt(max){
         
        const allCategory = await Category.find({});
     //    console.log("value of all category",allCategory);
-     console.log("find all category successfully");
+     console.log("find all category successfully"); 
        res.status(200).json({
         success:true,
         message:"All tags returned successfully",
@@ -70,7 +70,7 @@ function getRandomInt(max){
             .populate({
             path:"course",
               // here we change Published to Draft because still our all courses is not Published when it become Published then you need to change this 
-            match:{status:"Draft"},
+            match:{status:"Published"},
             populate:{
                 path:"ratingAndReview",
                 select: "Rating",
