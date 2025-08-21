@@ -29,6 +29,7 @@ const Mycourse = () => {
               setCourses(response);
               navigate("/dashboard/course-upload");
            }catch(error){
+            
               console.log("error in fetching the courses",error);
            }
     }

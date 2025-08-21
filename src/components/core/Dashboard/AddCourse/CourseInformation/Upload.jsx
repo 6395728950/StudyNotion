@@ -9,7 +9,7 @@ export default function Upload({
   name,
   label,
   register,
-  setValue,  // ✅ Corrected from setvalue
+  setValue,  
   errors,
   video = false,
   viewData = null,
