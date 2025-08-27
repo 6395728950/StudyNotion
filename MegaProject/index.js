@@ -23,9 +23,9 @@ cloudinaryConnect();
 // ✅ CORS configuration (moved to top for best practice)
 const corsOptions = {
   origin: [
-    'https://studynotion-frontend-inky-eight.vercel.app'
+    // 'https://studynotion-frontend-inky-eight.vercel.app'
     // 'https://studynotion-frontend.vercel.app',
-    // 'http://localhost:3000'
+    'http://localhost:3000'
    
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],

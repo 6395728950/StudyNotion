@@ -70,7 +70,7 @@ function getRandomInt(max){
             .populate({
             path:"course",
               // here we change Published to Draft because still our all courses is not Published when it become Published then you need to change this 
-            match:{status:"Published"},
+            match:{status:"Draft"},
             populate:{
                 path:"ratingAndReview",
                 select: "Rating",

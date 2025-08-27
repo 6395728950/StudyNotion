@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const getCatalogPageData= async(categoryId) => {
  let result = [];
+ console.log('what is come in id',categoryId);
  try{
       const response = await apiconnector("POST",catalogData.CATALOGPAGEDATA_API,{
         categoryId:categoryId
